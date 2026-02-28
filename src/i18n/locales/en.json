@@ -1,0 +1,272 @@
+{
+  "common": {
+    "logo": "Logo",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "close": "Close",
+    "apply": "Apply",
+    "learnMore": "Learn More",
+    "backToSelection": "Back to Selection",
+    "exploreJobs": "Explore Jobs",
+    "exploreEntryLevelJobs": "Explore Entry-Level Jobs",
+    "loadingJobDetails": "Loading job details…",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "services": "Service",
+    "allRightsReserved": "All rights reserved"
+  },
+  "qualificationPage": {
+    "title": "Choose Your Path",
+    "subtitle": "Select the option that best describes your professional background and let us find the perfect opportunities for you",
+    "withQualification": {
+      "title": "With Qualification",
+      "description": "I have professional certifications, degrees, or specialized training that validate my expertise in my field.",
+      "benefit": "Access to specialized positions"
+    },
+    "withoutQualification": {
+      "title": "Without Qualification",
+      "description": "I'm building my career through practical experience, skills development, and on-the-job learning.",
+      "benefit": "Focus on experience-based roles"
+    },
+    "postJob": {
+      "title": "Post a Job",
+      "description": "I'm an employer looking to hire qualified professionals or enthusiastic candidates for my organization.",
+      "benefit": "Reach thousands of candidates"
+    },
+    "choosePath": "Choose Your Path",
+    "choosePathDescription": "Choose the career path that suits you and start your journey to success"
+  },
+  "qualifiedHome": {
+    "hero": {
+      "title": "Turn Your <span class=\"text-indigo-400\">Qualifications</span><br />Into Global Opportunities",
+      "subtitle": "We connect qualified professionals with companies that value skills, certifications, and expertise — not noise."
+    },
+    "features": {
+      "verifiedCompanies": {
+        "title": "Verified Companies",
+        "description": "Work with organizations that actively seek qualified talent."
+      },
+      "skillMatching": {
+        "title": "Skill-Focused Matching",
+        "description": "Your education and certifications matter here."
+      },
+      "careerGrowth": {
+        "title": "Career Growth Path",
+        "description": "Move forward with clarity, confidence, and control."
+      }
+    },
+    "exploreOpportunities": "Explore Opportunities"
+  },
+  "unqualifiedHome": {
+    "hero": {
+      "title": "Start Your <span class=\"text-purple-400\">Career Journey</span><br />Today",
+      "subtitle": "Discover opportunities that welcome fresh talent and provide the training you need to succeed in your first professional role."
+    },
+    "features": {
+      "entryLevel": {
+        "title": "Entry-Level Opportunities",
+        "description": "Start your career with positions that value potential and enthusiasm."
+      },
+      "skillDevelopment": {
+        "title": "Skill Development",
+        "description": "Grow through on-the-job training and mentorship programs."
+      },
+      "careerFoundation": {
+        "title": "Career Foundation",
+        "description": "Build your professional experience with supportive employers."
+      }
+    },
+    "trust": {
+      "title": "Begin Your Professional Journey",
+      "subtitle": "Every expert was once a beginner. Take the first step towards your career today."
+    }
+  },
+  "applyPage": {
+    "title": "Job Application",
+    "steps": {
+      "basicInfo": "Basic Information",
+      "contactInfo": "Contact Information",
+      "education": "Education",
+      "additionalInfo": "Additional Information"
+    },
+    "basicInfo": {
+      "name": "Full Name",
+      "birthdate": "Date of Birth",
+      "maritalStatus": "Marital Status",
+      "placeOfResidence": "Place of Residence",
+      "currentJob": "Current Job",
+      "drivingLicense": "Do you have a driving license?",
+      "licenseType": "License Type",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "contactInfo": {
+      "phone": "Phone Number",
+      "email": "Email Address"
+    },
+    "education": {
+      "educationLevel": "Education Level",
+      "schoolName": "School/University Name",
+      "specialization": "Specialization",
+      "graduationYear": "Graduation Year",
+      "grade": "Grade/GPA"
+    },
+    "additionalInfo": {
+      "higherDegree": "Higher Degree",
+      "degreePlace": "Degree Institution",
+      "degreeSpecialization": "Degree Specialization",
+      "degreeYear": "Degree Year",
+      "degreeGrade": "Degree Grade",
+      "cvUpload": "Upload CV",
+      "submitting": "Submitting..."
+    }
+  },
+  "postJobPage": {
+    "title": "Post a New Job",
+    "subtitle": "Find the perfect candidate for your opportunity",
+    "form": {
+      "jobType": "Job Type",
+      "selectJobType": "Select job type",
+      "qualified": "Qualified Position",
+      "unqualified": "Entry-Level Position",
+      "title": "Job Title",
+      "titlePlaceholder": "Enter job title",
+      "description": "Job Description",
+      "descriptionPlaceholder": "Enter detailed job description",
+      "location": "Location",
+      "locationPlaceholder": "Enter job location",
+      "employmentType": "Employment Type",
+      "salary": "Salary",
+      "salaryPlaceholder": "Enter salary range",
+      "experience": "Experience Level",
+      "createJob": "Create Job",
+      "editJob": "Update Job",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "jobSubmitted": "Job submitted for approval!",
+      "submitFailed": "Failed to submit job",
+      "close": "Close"
+    }
+  },
+  "jobDetails": {
+    "title": "Job Details",
+    "location": "Location",
+    "employmentType": "Employment Type",
+    "salary": "Salary",
+    "experience": "Experience Level",
+    "description": "Description",
+    "requirements": "Key Requirements",
+    "growth": "Growth Opportunity",
+    "readyToApply": "Ready to Apply?",
+    "takeNextStep": "Take the next step in your career journey",
+    "applyNow": "Apply Now",
+    "backToJobs": "Back to Jobs"
+  },
+  "approvedJobs": {
+    "title": "Find a Job",
+    "subtitle": "Browse open positions and apply today",
+    "loading": "Loading jobs…",
+    "noJobs": "No jobs available at the moment",
+    "viewDetails": "View Details"
+  },
+  "aboutPage": {
+    "title": "About the Company",
+    "subtitle": "The strongest bridge and the leading destination for international recruitment",
+    "intro": {
+      "p1": "We are Al-Jamia Company for the Recruitment of Egyptian Manpower Abroad (LLC), operating under the Egyptian Ministry of Manpower license No. (726). We are proud to be the trusted strategic partner for leading institutions and prominent business leaders in the Kingdom of Saudi Arabia.",
+      "p2": "Our company was established to lead the human resources sector. We specialize in selecting and recruiting top Egyptian talent and supporting the Saudi market with professional cadres that contribute effectively to achieving Saudi Vision 2030. At “Al-Jamia,” we do not stop at recruitment—we build sustainable partnerships founded on competence, integrity, and absolute professionalism."
+    },
+    "coreValues": {
+      "title": "Our Core Values - Pillars of Success",
+      "items": [
+        {
+          "title": "Trust (Our solemn covenant)",
+          "description": "Our clients’ trust is our greatest asset, earned through our strict commitment to providing talent that precisely matches the highest required standards and specifications."
+        },
+        {
+          "title": "Excellence (Our practical approach)",
+          "description": "Our management adopts innovative operational strategies and modern digital solutions, ensuring smooth, professional processing of all transactions while maintaining institutional performance standards."
+        },
+        {
+          "title": "Success (The language of numbers)",
+          "description": "We are proud to be the first choice for major companies in the Kingdom. Our journey has been crowned by employing more than 50,000 Egyptian professionals, achieving milestones that positioned us as a leader in overseas manpower recruitment."
+        }
+      ]
+    },
+    "whyChooseUs": {
+      "title": "Why do business owners choose us?",
+      "items": [
+        "Speed of execution: We have an integrated workflow to complete all legal and administrative procedures in record time.",
+        "Continuous support: Our commitment does not end at contracting; we support both client and candidate from the first moment until successful placement and stability at the workplace.",
+        "Official credibility: Extensive experience and a strong track record under full supervision of the Ministry of Manpower and the competent authorities."
+      ]
+    }
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "message": "Message",
+      "submit": "Send Message"
+    }
+  },
+  "servicesPage": {
+    "title": "Our Services",
+    "intro": "At Al-Jamia Company, we provide an integrated system of services specifically designed to meet the aspirations of business owners and facilitate the journey of Egyptian talents through three main pillars:",
+    "section1": {
+      "title": "1. International Recruitment & Workforce Deployment Solutions",
+      "items": [
+        "We follow a strategic methodology that professionally manages the full recruitment cycle:",
+        "Elite Talent Acquisition: Precise selection of candidates based on merit standards and alignment with Saudi and international labor market requirements.",
+        "Smart Interview Management: Fully equipped interview halls or remote interview management through advanced video conferencing systems.",
+        "Comprehensive Logistical Support: Step-by-step guidance from contract signing and medical examinations to travel arrangements and reception.",
+        "Musaned Platform Services: Full specialization in completing domestic labor recruitment procedures (individuals) with direct electronic integration to ensure rapid execution."
+      ]
+    },
+    "section2": {
+      "title": "2. Consular Services & Work Visas",
+      "items": [
+        "Our deep expertise transforms complex procedures into a smooth and fast process:",
+        "Saudi Visa Management: Completing all visa procedures through Saudi consulates in the Arab Republic of Egypt (Cairo, Alexandria, and Suez).",
+        "Electronic Authorization System: Activation and management of authorizations on approved visa platforms (Enjaz) with precision and professionalism.",
+        "Biometric Appointment Booking (TasHeel): Managing biometric bookings at VFS TasHeel centers and organizing GAMCA medical appointments.",
+        "File Review: Comprehensive technical review of all documents prior to submission to avoid rejection or delays."
+      ]
+    },
+    "section3": {
+      "title": "3. International Documentation & Attestation",
+      "items": [
+        "We provide professional and accredited documentation services to ensure your documents are officially recognized for international use:",
+        "Academic Qualifications: Attestation of university degrees, diplomas, and postgraduate studies through the Ministry of Foreign Affairs and Cultural Attaché.",
+        "Official & Personal Documents: Certification of birth certificates, marriage contracts, powers of attorney, and experience certificates.",
+        "Employment Contracts: Contract attestation to ensure legal validity and protection of all parties internationally."
+      ]
+    },
+    "whyChoose": {
+      "title": "Why Choose Our Company?",
+      "items": [
+        "Absolute Professionalism: A structured approach in managing all procedures.",
+        "Speed & Commitment: We value time in the business world and strictly adhere to deadlines.",
+        "Specialized Team: Experts fully updated with the latest labor laws and regulations for 2026."
+      ]
+    },
+    "whyDifferent": {
+      "title": "Why Are We Different?",
+      "items": [
+        "Nationwide Coverage: Serving you across all governorates with the same efficiency.",
+        "Alignment with Vision 2026: Real-time adaptation to Saudi employment systems (ensuring no disruption to your transactions).",
+        "Transparency: Full clarity in fees, procedures, and timelines for every service."
+      ]
+    }
+  }
+}
