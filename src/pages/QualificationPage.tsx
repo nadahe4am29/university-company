@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { FaArrowDown, FaPlus, FaCheckCircle } from "react-icons/fa";
+import { FaArrowDown, FaPlus } from "react-icons/fa";
 import logo from "../assets/1.png";
 
 const QualificationPage = () => {
@@ -15,9 +15,9 @@ const QualificationPage = () => {
     <div className="min-h-screen relative overflow-hidden bg-[#c0c0ce]">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-linear-to-br from-[#c0c0ce] via-[#001018] to-[#c0c0ce]" />
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-500/30 rounded-full blur-[160px] animate-blob" />
-        <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-emerald-400/25 rounded-full blur-[160px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-200px] left-1/3 w-[600px] h-[600px] bg-purple-500/25 rounded-full blur-[160px] animate-blob animation-delay-4000" />
+        <div className="absolute -top-40 -left-40 w-150 h-150 bg-blue-500/30 rounded-full blur-[160px] animate-blob" />
+        <div className="absolute top-1/3 -right-40 w-150 h-150 bg-emerald-400/25 rounded-full blur-[160px] animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-50 left-1/3 w-150 h-150 bg-purple-500/25 rounded-full blur-[160px] animate-blob animation-delay-4000" />
 
         {/* Noise overlay */}
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-soft-light" />
@@ -56,7 +56,7 @@ const QualificationPage = () => {
                   }}
                 ></div>
 
-                <div className="relative h-[220px] bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl p-8">
+                <div className="relative h-55 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl p-8">
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-emerald-400 rounded-full flex items-center justify-center">
                       <FaArrowDown className="w-8 h-8 text-white" />
@@ -108,10 +108,10 @@ const QualificationPage = () => {
                 <p className="text-gray-900 mb-6 leading-relaxed">
                   {t("qualificationPage.postJob.description")}
                 </p>
-                <div className="flex items-center text-gray-900 text-sm">
+                {/* <div className="flex items-center text-gray-900 text-sm">
                   <FaCheckCircle className="w-4 h-4 mr-2" />
                   {t("qualificationPage.postJob.benefit")}
-                </div>
+                </div> */}
               </div>
             </div>
             {showQualificationOptions && (
