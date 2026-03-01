@@ -42,7 +42,7 @@ const QualificationPage = () => {
           {/* Options cards */}
           <div className="grid md:grid-cols-2 gap-8">
             {/* Combined Qualification Card */}
-            <div className="relative">
+            <div className="relative h-50">
               <div
                 onClick={() => setShowQualificationOptions(true)}
                 className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105"
@@ -74,7 +74,7 @@ const QualificationPage = () => {
             </div>
             {/* Post Job Card */}
             <div
-              className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+              className={`relative h-50 group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
                 selectedOption === "post-job" ? "scale-105" : ""
               }`}
               onClick={() => {

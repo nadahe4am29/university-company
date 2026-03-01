@@ -40,7 +40,7 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
   }, [jobType]);
 
   return (
-    <section className="relative py-20 bg-black/55 w-full border-t border-white/10">
+    <section className="relative py-20 bg-black/55 w-full border-t border-white/10 h-screen">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-white">
           {t("approvedJobs.title")}

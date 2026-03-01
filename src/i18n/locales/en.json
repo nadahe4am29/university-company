@@ -26,6 +26,7 @@
   "qualificationPage": {
     "title": "Choose Your Path",
     "subtitle": "Select the option that best describes your professional background and let us find the perfect opportunities for you",
+    "selectOption": "Select Option",
     "withQualification": {
       "title": "With Qualification",
       "description": "I have professional certifications, degrees, or specialized training that validate my expertise in my field.",
