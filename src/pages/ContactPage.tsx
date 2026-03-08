@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Header from "../components/Header";
 
 const ContactPage = () => {
   const { t } = useTranslation();
@@ -16,7 +15,6 @@ const ContactPage = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000));
       alert("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
@@ -45,9 +43,6 @@ const ContactPage = () => {
         <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-emerald-300/20 rounded-full blur-[180px] animate-blob animation-delay-2000" />
         <div className="absolute bottom-[-200px] left-1/4 w-[600px] h-[600px] bg-purple-300/15 rounded-full blur-[180px] animate-blob animation-delay-4000" />
       </div>
-
-      {/* Navbar */}
-      <Header />
 
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center text-center px-6 pt-32 pb-16">
@@ -221,7 +216,7 @@ const ContactPage = () => {
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">🤝</span>
                   <h3 className="text-lg font-semibold text-purple-400">
-                    الخدمات القنصلية والدعم
+                    الخدمات القنصلية ومساند
                   </h3>
                 </div>
                 <p className="text-white/70 mb-2">الدعم الفني</p>
@@ -262,7 +257,7 @@ const ContactPage = () => {
           {/* Social Media */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-8 text-center text-indigo-300">
-              تابعنا على وسائل التواصل الاجتماعي
+              كن قريبا منا
             </h2>
             <div className="flex justify-center gap-6">
               <a
@@ -271,7 +266,13 @@ const ContactPage = () => {
                 rel="noopener noreferrer"
                 className="w-16 h-16 bg-blue-600/20 hover:bg-blue-600/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-blue-500/30"
               >
-                <span className="text-2xl">📘</span>
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-5.373-12-12-12c0-6.627 5.373-12 12 12 0 0 12 5.373 12 12 12zm-3.158 4.729v10.538c0-1.175-.496-3.058-1.555-3.058-3.058-1.555 0-3.058 1.555 3.058 1.555 3.058v10.538c0 1.175.496 3.058 1.555 3.058 3.058 1.555 3.058zm1.474 5.79c.465-.433.895-1.413 1.413-1.413-.895 1.414-1.414 1.414z" />
+                </svg>
               </a>
               <a
                 href="https://linkedin.com"
@@ -279,15 +280,27 @@ const ContactPage = () => {
                 rel="noopener noreferrer"
                 className="w-16 h-16 bg-blue-700/20 hover:bg-blue-700/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-blue-600/30"
               >
-                <span className="text-2xl">💼</span>
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20.447 20.452h-3.554v-3.586c0-4.517-3.872-3.108-9.089-3.108-9.089s3.108-9.089 3.108-9.089h3.554v3.586h-3.554c-4.517 0-8.335 3.872-3.108 9.089-3.108 9.089 3.108 8.335 3.108 9.089 9.089v3.586h3.554zm-3.61-3.586v8.416c0 4.964 4.027 9.089 9.089s9.089-4.027-9.089-9.089h-4.982c0-3.586-3.108-6.516-3.108-6.516s-3.108 6.516-3.108 6.516v8.416z" />
+                </svg>
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-16 h-16 bg-pink-600/20 hover:bg-pink-600/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-pink-500/30"
+                className="w-16 h-16 bg-linear-to-br from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-purple-500/30"
               >
-                <span className="text-2xl">📷</span>
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2.163c3.204 0 6.912 2.833 7.5 2.833s-3.204-2.833-7.5-2.833-7.5 2.833-2.833-2.833c0-3.063 1.426-4.667 4.25-4.667s-4.667-4.25-4.667-4.25-4.667c0-2.879 1.151-5.583 3.428-5.583s-5.583-3.428-5.583-3.428c0-2.009 1.492-4.315 3.428-4.315s-4.315-3.428-4.315-3.428c0-2.38 1.823-4.381 3.428-4.381s-4.381-3.428-4.381-3.428v-1.796c0-2.699-2.175-4.891-4.565-4.891s-4.891-4.565-4.891-4.565c0-3.179 1.362-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.833 1.226-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.52 1.09-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.433 1.004-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.196 1.009-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.455 1.009-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-2.274 1.009-4.565 3.857-4.565s-4.565-3.857-4.565-3.857c0-1.856.642-3.857 3.857-3.857s-3.857-3.857-3.857-3.857c0-1.423.727-3.857 3.857-3.857s-3.857-3.857-3.857-3.857c0-.931.273-3.857 3.857-3.857s-3.857-3.857-3.857-3.857z" />
+                </svg>
               </a>
             </div>
             <p className="text-center text-white/70 mt-4">
@@ -308,7 +321,9 @@ const ContactPage = () => {
                 <h3 className="text-xl font-semibold mb-3 text-indigo-300">
                   استجابة فورية
                 </h3>
-                <p className="text-white/70">فريق دعم فني سريع ومتجاوب</p>
+                <p className="text-white/70">
+                  فريقنا يعمل بنظام الدعم الفني السريع للرد على استفساراتكم.
+                </p>
               </div>
 
               <div className="text-center group">
@@ -319,7 +334,8 @@ const ContactPage = () => {
                   شفافية كاملة
                 </h3>
                 <p className="text-white/70">
-                  معلومات دقيقة حول الإجراءات والرسوم الرسمية
+                  نحرص على تقديم نحرص على تقديم معلومات دقيقة حول الإجراءات
+                  والرسوم الرسمية
                 </p>
               </div>
 
@@ -331,7 +347,7 @@ const ContactPage = () => {
                   دعم ممتد
                 </h3>
                 <p className="text-white/70">
-                  خدماتنا لا تنتهي بعد سفر الكوادر
+                  خدماتنا لا تنتهي بمجرد سفر الكادر، نحن معك دائماً.
                 </p>
               </div>
             </div>

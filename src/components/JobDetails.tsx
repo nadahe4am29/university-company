@@ -1,6 +1,7 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FiShare2 } from "react-icons/fi";
 
 interface Job {
   _id: string;
@@ -18,17 +19,59 @@ export default function JobDetails() {
   const location = useLocation();
   const { t } = useTranslation();
   const [job, setJob] = useState<Job | null>(null);
+  const [showShareMessage, setShowShareMessage] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/jobs/${id}`)
-      .then((res) => res.json())
-      .then(setJob);
-  }, [id]);
+    const fetchJobDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/jobs/${id}`);
+
+        if (!response.ok) {
+          throw new Error("Job not found");
+        }
+
+        const data = await response.json();
+
+        if (!data) {
+          throw new Error("No job data");
+        }
+
+        setJob(data);
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+
+        // If job ID matches our constant job, show the constant job details
+        if (id === "UG-726-01") {
+          setJob({
+            _id: "UG-726-01",
+            title: t("constantJob.title"),
+            description: t("constantJob.description"),
+            location: t("constantJob.location"),
+            jobType: "qualified",
+            salary: t("constantJob.salary"),
+            experience: t("constantJob.experience"),
+          });
+        } else {
+          setJob(null);
+        }
+      }
+    };
+
+    if (id) {
+      fetchJobDetails();
+    }
+  }, [id, t]);
 
   const handleApply = () => {
     navigate(`/apply/${id}`, {
       state: { isQualified: location.state?.isQualified || false },
     });
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setShowShareMessage(true);
+    setTimeout(() => setShowShareMessage(false), 2000);
   };
 
   if (!job) {
@@ -200,6 +243,16 @@ export default function JobDetails() {
                   >
                     {t("jobDetails.applyNow")}
                   </button>
+
+                  <div className="mt-3">
+                    <button
+                      onClick={handleShare}
+                      className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 py-3 text-white text-sm font-medium hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <FiShare2 className="w-4 h-4" />
+                      {showShareMessage ? "تم نسخ الرابط!" : "مشاركة الرابط"}
+                    </button>
+                  </div>
 
                   <div className="mt-6 flex items-center justify-center gap-4 text-xs text-white/50">
                     <span className="flex items-center gap-1">

@@ -33,7 +33,7 @@ const JobForm = ({
     job?.employmentType || "Full-time",
   );
   const [salary, setSalary] = useState(job?.salary || "");
-  const [experience, setExperience] = useState(job?.experience || "Junior");
+  const [experience, setExperience] = useState(job?.experience || "");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,7 +73,7 @@ const JobForm = ({
       setLocation("");
       setEmploymentType("Full-time");
       setSalary("");
-      setExperience("Junior");
+      setExperience("");
       setJobType("");
       if (onClose) onClose();
     } else {

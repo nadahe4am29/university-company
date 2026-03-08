@@ -221,6 +221,13 @@
       "submit": "Send Message"
     }
   },
+  "constantJob": {
+    "title": "Financial Accountant",
+    "description": "Required immediately for major general contracting companies in the Kingdom of Saudi Arabia. Educational Qualification: Bachelor of Commerce (Accounting specialization). Years of Experience: Not less than 5 years of actual experience in the accounting field. Required Skills: Fluent in English (reading and writing), Proficient in using accounting software and financial systems, Ability to prepare financial reports and financial analysis. Benefits: Competitive salary based on efficiency and experience, Full provision of accommodation, transportation, comprehensive medical insurance, and annual flight tickets.",
+    "location": "Jeddah, Saudi Arabia",
+    "salary": "Competitive",
+    "experience": "5+ Years"
+  },
   "servicesPage": {
     "title": "Our Services",
     "intro": "At Al-Jamia Company, we provide an integrated system of services specifically designed to meet the aspirations of business owners and facilitate the journey of Egyptian talents through three main pillars:",

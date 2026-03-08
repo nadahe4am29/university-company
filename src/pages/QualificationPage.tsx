@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaArrowDown, FaPlus } from "react-icons/fa";
-import logo from "../assets/1.png";
+import logo from "../assets/logo.jpeg";
 
 const QualificationPage = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -29,7 +29,7 @@ const QualificationPage = () => {
           {/* Header section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center bg-[#c0c0ce] backdrop-blur-sm rounded-full mb-6">
-              <img src={logo} alt="" width={200} height={200} />
+              <img src={logo} alt="logo" className="rounded w-60 h-60" />
             </div>
             <h1 className="text-5xl font-bold text-white mb-4">
               {t("qualificationPage.title")}

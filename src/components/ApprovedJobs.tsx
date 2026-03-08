@@ -30,14 +30,43 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
       .get(endpoint)
       .then((res) => res.data)
       .then((data: Job[]) => {
-        setJobs(data);
+        // If no jobs from backend, show constant job for qualified positions
+        if (data.length === 0 && jobType === "qualified") {
+          setJobs([
+            {
+              _id: "UG-726-01",
+              title: t("constantJob.title"),
+              description: t("constantJob.description"),
+              location: t("constantJob.location"),
+              status: "approved",
+              jobType: "qualified",
+            },
+          ]);
+        } else {
+          setJobs(data);
+        }
         setLoading(false);
       })
       .catch((err) => {
         console.error(`Error fetching ${jobType} jobs:`, err);
+        // If backend fails, show constant job for qualified positions
+        if (jobType === "qualified") {
+          setJobs([
+            {
+              _id: "UG-726-01",
+              title: t("constantJob.title"),
+              description: t("constantJob.description"),
+              location: t("constantJob.location"),
+              status: "approved",
+              jobType: "qualified",
+            },
+          ]);
+        } else {
+          setJobs([]);
+        }
         setLoading(false);
       });
-  }, [jobType]);
+  }, [jobType, t]);
 
   return (
     <section className="relative py-20 bg-black/55 w-full border-t border-white/10 h-screen">
