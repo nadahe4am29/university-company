@@ -40,7 +40,6 @@ const JobForm = ({
     e.preventDefault();
     setLoading(true);
 
-    // Validate job type is selected
     if (!jobType) {
       alert(t("postJobPage.form.selectJobType"));
       setLoading(false);
@@ -51,7 +50,7 @@ const JobForm = ({
       title,
       description,
       location,
-      jobType: jobType, // Use the selected type
+      jobType: jobType,
       employmentType,
       salary,
       experience,
@@ -67,7 +66,6 @@ const JobForm = ({
 
     if (data.success) {
       alert(t("postJobPage.form.jobSubmitted"));
-      // Reset form
       setTitle("");
       setDescription("");
       setLocation("");
@@ -86,10 +84,10 @@ const JobForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-[#1a1f2e]/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6 border border-white/10 max-w-xl mx-auto"
+      className="card-surface mx-auto max-w-xl space-y-5 p-6 sm:p-8"
     >
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-white">
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="text-xl font-semibold text-card-foreground sm:text-2xl">
           {mode === "create"
             ? t("postJobPage.title")
             : t("postJobPage.form.editJob")}
@@ -98,45 +96,42 @@ const JobForm = ({
           <button
             type="button"
             onClick={onClose}
-            className="cursor-pointer text-white/60 hover:text-white transition-colors"
+            className="rounded-lg p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            aria-label="Close"
           >
             <IoClose size={24} />
           </button>
         )}
       </div>
 
-      {/* Job Type Dropdown - Show if isQualified is undefined */}
       {isQualified === undefined && (
         <div>
-          <label className="block text-white font-medium mb-2">
+          <label className="mb-2 block text-sm font-medium text-foreground">
             {t("postJobPage.form.jobType")} *
           </label>
           <select
-            className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+            className="input-field"
             value={jobType}
             onChange={(e) =>
               setJobType(e.target.value as "qualified" | "unqualified")
             }
             required
           >
-            <option value="" className="bg-[#1a1f2e] text-white/50">
+            <option value="" className="text-muted-foreground">
               {t("postJobPage.form.selectJobType")}
             </option>
-            <option value="qualified" className="bg-[#1a1f2e]">
-              {t("postJobPage.form.qualified")}
-            </option>
-            <option value="unqualified" className="bg-[#1a1f2e]">
+            <option value="qualified">{t("postJobPage.form.qualified")}</option>
+            <option value="unqualified">
               {t("postJobPage.form.unqualified")}
             </option>
           </select>
         </div>
       )}
 
-      {/* Job Type Indicator - Show if isQualified is provided */}
       {isQualified !== undefined && (
-        <div className="text-sm text-white/70 bg-white/5 px-4 py-2 rounded-lg">
+        <div className="rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
           Posting as:{" "}
-          <span className="font-semibold text-white">
+          <span className="font-semibold text-foreground">
             {isQualified ? "Qualified" : "Unqualified"}
           </span>{" "}
           job
@@ -145,7 +140,7 @@ const JobForm = ({
 
       <input
         placeholder={t("postJobPage.form.titlePlaceholder")}
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+        className="input-field"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
@@ -154,7 +149,7 @@ const JobForm = ({
       <textarea
         placeholder={t("postJobPage.form.descriptionPlaceholder")}
         rows={5}
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all resize-none"
+        className="input-field resize-none"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
@@ -162,39 +157,40 @@ const JobForm = ({
 
       <input
         placeholder={t("postJobPage.form.locationPlaceholder")}
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+        className="input-field"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         required
       />
 
       <select
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+        className="input-field"
         value={employmentType}
         onChange={(e) => setEmploymentType(e.target.value)}
       >
-        <option className="bg-[#1a1f2e]">Full-time</option>
-        <option className="bg-[#1a1f2e]">Part-time</option>
-        <option className="bg-[#1a1f2e]">Internship</option>
-        <option className="bg-[#1a1f2e]">Contract</option>
+        <option>Full-time</option>
+        <option>Part-time</option>
+        <option>Internship</option>
+        <option>Contract</option>
       </select>
 
       <input
         placeholder={t("postJobPage.form.experience")}
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+        className="input-field"
         value={experience}
         onChange={(e) => setExperience(e.target.value)}
       />
 
       <input
         placeholder={t("postJobPage.form.salaryPlaceholder")}
-        className="w-full bg-white/10 border border-white/20 px-4 py-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+        className="input-field"
         value={salary}
         onChange={(e) => setSalary(e.target.value)}
       />
 
       <button
-        className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+        type="submit"
+        className="btn-primary w-full disabled:opacity-50"
         disabled={loading}
       >
         {loading

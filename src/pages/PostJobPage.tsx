@@ -8,38 +8,27 @@ const PostJobPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050508]">
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-linear-to-br from-[#0a0f2c] via-[#050508] to-[#001018]" />
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-500/30 rounded-full blur-[160px] animate-blob" />
-        <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-emerald-400/25 rounded-full blur-[160px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-200px] left-1/3 w-[600px] h-[600px] bg-purple-500/25 rounded-full blur-[160px] animate-blob animation-delay-4000" />
-      </div>
+    <div className="page-mesh relative min-h-screen overflow-hidden">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100dvh-8rem)] max-w-2xl flex-col justify-center px-4 py-12 sm:px-6 md:py-16">
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="btn-secondary mb-8 w-fit gap-2 self-start px-4 py-2.5 text-sm"
+        >
+          <FaArrowLeft className="h-4 w-4 rtl:rotate-180" />
+          {t("common.backToSelection")}
+        </button>
 
-      {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-20">
-        <div className="w-full max-w-2xl">
-          {/* Back Button */}
-          <button
-            onClick={() => navigate("/")}
-            className="mb-6 flex items-center text-white/70 hover:text-white transition-colors"
-          >
-            <FaArrowLeft className="w-5 h-5 mr-2" />
-            {t("common.backToSelection")}
-          </button>
-
-          {/* Page Title */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-4">
-              {t("postJobPage.title")}
-            </h1>
-            <p className="text-lg text-white/70">{t("postJobPage.subtitle")}</p>
-          </div>
-
-          {/* Job Form */}
-          <JobForm mode="create" onClose={() => navigate("/")} />
+        <div className="mb-8 text-center">
+          <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
+            {t("postJobPage.title")}
+          </h1>
+          <p className="text-base text-muted-foreground sm:text-lg">
+            {t("postJobPage.subtitle")}
+          </p>
         </div>
+
+        <JobForm mode="create" onClose={() => navigate("/")} />
       </div>
     </div>
   );

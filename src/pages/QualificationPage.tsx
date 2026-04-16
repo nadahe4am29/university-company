@@ -1,168 +1,265 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { FaArrowDown, FaPlus } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
+import { FaUserTie, FaBuilding, FaArrowRight } from "react-icons/fa";
 import logo from "../assets/logo.jpeg";
+import ImageSlider from "../components/ImageSlider";
+import { useIsRtl } from "../hooks/useIsRtl";
+import LogoCarousel from "../components/LogoSlider";
+
+const SNAPPY_SPRING = {
+  type: "spring" as const,
+  stiffness: 380,
+  damping: 28,
+  mass: 0.65,
+};
 
 const QualificationPage = () => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showQualificationOptions, setShowQualificationOptions] =
     useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const isRtl = useIsRtl();
+
+  // Hero slider images
+  const heroImages = [
+    "/src/assets/logo/2.png",
+    "/src/assets/2.png",
+    "/src/assets/3.png",
+  ];
+
+  const headerVariants: Variants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { ...SNAPPY_SPRING, delay: 0.03 },
+    },
+  };
+
+  const leftCardVariants: Variants = useMemo(() => {
+    const m = isRtl ? -1 : 1;
+    return {
+      hidden: { x: -60 * m, opacity: 0 },
+      visible: {
+        x: 0,
+        opacity: 1,
+        transition: { ...SNAPPY_SPRING, delay: 0.07 },
+      },
+    };
+  }, [isRtl]);
+
+  const rightCardVariants: Variants = useMemo(() => {
+    const m = isRtl ? -1 : 1;
+    return {
+      hidden: { x: 60 * m, opacity: 0 },
+      visible: {
+        x: 0,
+        opacity: 1,
+        transition: { ...SNAPPY_SPRING, delay: 0.12 },
+      },
+    };
+  }, [isRtl]);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[#c0c0ce]">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-linear-to-br from-[#c0c0ce] via-[#001018] to-[#c0c0ce]" />
-        <div className="absolute -top-40 -left-40 w-150 h-150 bg-blue-500/30 rounded-full blur-[160px] animate-blob" />
-        <div className="absolute top-1/3 -right-40 w-150 h-150 bg-emerald-400/25 rounded-full blur-[160px] animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-50 left-1/3 w-150 h-150 bg-purple-500/25 rounded-full blur-[160px] animate-blob animation-delay-4000" />
+    <div className="page-mesh relative min-h-screen overflow-hidden">
+      {/* Hero Image Slider */}
+      <section className="relative h-[60vh] sm:h-[70vh]">
+        <ImageSlider
+          images={heroImages}
+          autoPlay={true}
+          interval={5000}
+          showDots={true}
+          showArrows={true}
+          className="h-full"
+        />
 
-        {/* Noise overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-soft-light" />
-      </div>
-
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-        <div className="w-full">
-          {/* Header section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center bg-[#c0c0ce] backdrop-blur-sm rounded-full mb-6">
-              <img src={logo} alt="logo" className="rounded w-60 h-60" />
+        {/* Hero Content Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+          <motion.div
+            variants={headerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl px-4 text-center text-white sm:px-6"
+          >
+            <div className="mb-6 inline-block rounded-2xl border border-white/30 bg-white/20 p-1 shadow-lg backdrop-blur-sm ring-1 ring-white/60">
+              <img
+                src={logo}
+                alt="logo"
+                className="h-20 w-20 rounded-xl object-contain sm:h-24 sm:w-24"
+              />
             </div>
-            <h1 className="text-5xl font-bold text-white mb-4">
+            <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-4xl md:text-5xl">
               {t("qualificationPage.title")}
             </h1>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            <p className="mx-auto max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
               {t("qualificationPage.subtitle")}
             </p>
-          </div>
 
-          {/* Options cards */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Combined Qualification Card */}
-            <div className="relative h-50">
-              <div
-                onClick={() => setShowQualificationOptions(true)}
-                className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105"
-              >
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    backgroundImage: `url(/src/assets/world.png)`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                ></div>
-
-                <div className="relative h-55 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-emerald-400 rounded-full flex items-center justify-center">
-                      <FaArrowDown className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 ml-4">
-                      {t("qualificationPage.choosePath")}
-                    </h3>
-                  </div>
-
-                  <p className="text-gray-900">
-                    {t("qualificationPage.choosePathDescription")}
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Post Job Card */}
-            <div
-              className={`relative h-50 group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                selectedOption === "post-job" ? "scale-105" : ""
-              }`}
-              onClick={() => {
-                setSelectedOption("post-job");
-                navigate("/post-job");
-              }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.28 }}
+              className="mt-8"
             >
-              <div
-                className={`absolute inset-0 rounded-2xl transition-opacity duration-300 ${
-                  selectedOption === "post-job" ? "opacity-100" : "opacity-80"
-                } group-hover:opacity-100`}
-                style={{
-                  backgroundImage: `url(/src/assets/world.png)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-              <div
-                className={`relative bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl p-8 ${
-                  selectedOption === "post-job" ? "border-white/50" : ""
-                }`}
+              <button
+                type="button"
+                onClick={() => navigate("/qualified-home")}
+                className="btn-primary group px-8 py-4 text-base bg-white text-gray-900 hover:bg-gray-100 transition-colors"
               >
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center">
-                    <FaPlus className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 ml-4">
-                    {t("qualificationPage.postJob.title")}
-                  </h3>
-                </div>
-                <p className="text-gray-900 mb-6 leading-relaxed">
-                  {t("qualificationPage.postJob.description")}
-                </p>
-                {/* <div className="flex items-center text-gray-900 text-sm">
-                  <FaCheckCircle className="w-4 h-4 mr-2" />
-                  {t("qualificationPage.postJob.benefit")}
-                </div> */}
-              </div>
-            </div>
-            {showQualificationOptions && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center">
-                {/* Background overlay */}
-                <div
-                  className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-                  onClick={() => setShowQualificationOptions(false)}
-                ></div>
-
-                {/* Modal content */}
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-10 w-[90%] max-w-3xl animate-fadeIn">
-                  <h2 className="text-3xl font-bold text-white mb-8 text-center">
-                    {t("qualificationPage.selectOption")}
-                  </h2>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {/* Qualified */}
-                    <div
-                      onClick={() => navigate("/qualified-home")}
-                      className="cursor-pointer p-6 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-300"
-                    >
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        {t("qualificationPage.withQualification.title")}
-                      </h3>
-                      <p className="text-white/80">
-                        {t("qualificationPage.withQualification.description")}
-                      </p>
-                    </div>
-
-                    {/* Unqualified */}
-                    <div
-                      onClick={() => navigate("/unqualified-home")}
-                      className="cursor-pointer p-6 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-300"
-                    >
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        {t("qualificationPage.withoutQualification.title")}
-                      </h3>
-                      <p className="text-white/80">
-                        {t(
-                          "qualificationPage.withoutQualification.description",
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+                سجل سيرتك الذاتية
+                <FaArrowRight className="mr-2 text-xs transition group-hover:translate-x-1" />
+              </button>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="relative z-10 flex min-h-[calc(100vh-60vh)] flex-col items-center justify-center px-4 py-16 sm:px-6">
+        <div className="relative z-10 grid w-full max-w-4xl gap-5 sm:grid-cols-2 sm:gap-6">
+          <motion.div
+            variants={leftCardVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{
+              y: -4,
+              transition: { type: "spring", stiffness: 450, damping: 32 },
+            }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => setShowQualificationOptions(true)}
+            className="group card-surface cursor-pointer p-7 transition hover:border-primary/40 hover:shadow-md sm:p-8"
+          >
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
+              <FaUserTie className="text-2xl" />
+            </div>
+            <h3 className="mb-3 text-xl font-bold text-card-foreground">
+              {t("qualificationPage.choosePath")}
+            </h3>
+            <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+              {t("qualificationPage.choosePathDescription")}
+            </p>
+            <div className="flex items-center gap-2 text-sm font-bold text-primary">
+              ابدأ الآن
+              <FaArrowRight className="text-xs transition group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={rightCardVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{
+              y: -4,
+              transition: { type: "spring", stiffness: 450, damping: 32 },
+            }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => navigate("/post-job")}
+            className="group card-surface cursor-pointer p-7 transition hover:border-secondary/50 hover:shadow-md sm:p-8"
+          >
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10 text-secondary transition group-hover:bg-secondary group-hover:text-secondary-foreground">
+              <FaBuilding className="text-2xl" />
+            </div>
+            <h3 className="mb-3 text-xl font-bold text-card-foreground">
+              {t("qualificationPage.postJob.title")}
+            </h3>
+            <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+              {t("qualificationPage.postJob.description")}
+            </p>
+            <div className="flex items-center gap-2 text-sm font-bold text-secondary">
+              أعلن عن وظيفة
+              <FaArrowRight className="text-xs transition group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Success Partners Section */}
+      <section className="relative z-10 px-4 pb-16 sm:px-6 md:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <div className="mb-4 h-1.5 w-16 rounded-full bg-primary mx-auto" />
+            <h2 className="text-2xl font-bold text-foreground md:text-3xl lg:text-4xl">
+              {
+                "\u0634\u0631\u0643\u0627\u0621 \u0627\u0644\u0646\u062c\u0627\u062d"
+              }
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              {
+                "\u0646\u0641\u062e\u0631 \u0628\u0627\u0644\u0639\u0645\u0644 \u0645\u0639 \u0623\u0641\u0636\u0644 \u0627\u0644\u0634\u0631\u0643\u0627\u062a \u0641\u064a \u0627\u0644\u0645\u0646\u0637\u0642\u0629"
+              }
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="rounded-2xl border border-border p-8"
+          >
+            <LogoCarousel />
+          </motion.div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {showQualificationOptions && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="fixed inset-0 z-80 flex items-center justify-center p-4"
+          >
+            <button
+              type="button"
+              className="absolute inset-0 bg-foreground/50 backdrop-blur-sm"
+              aria-label="Close"
+              onClick={() => setShowQualificationOptions(false)}
+            />
+            <motion.div
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 420, damping: 32 }}
+              className="card-surface relative z-10 w-full max-w-lg p-8 shadow-2xl"
+            >
+              <h2 className="mb-8 text-center text-2xl font-bold text-card-foreground">
+                {t("qualificationPage.selectOption")}
+              </h2>
+              <div className="grid gap-3">
+                <button
+                  type="button"
+                  onClick={() => navigate("/qualified-home")}
+                  className="group rounded-xl border border-border bg-muted/50 p-5 text-left transition hover:border-primary/40 hover:bg-primary/5"
+                >
+                  <span className="block font-bold text-card-foreground group-hover:text-primary">
+                    {t("qualificationPage.withQualification.title")}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate("/unqualified-home")}
+                  className="group rounded-xl border border-border bg-muted/50 p-5 text-left transition hover:border-secondary/40 hover:bg-secondary/5"
+                >
+                  <span className="block font-bold text-card-foreground group-hover:text-secondary">
+                    {t("qualificationPage.withoutQualification.title")}
+                  </span>
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

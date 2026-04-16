@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { useTranslation } from "react-i18next";
 import {
   HiBriefcase,
@@ -7,174 +8,132 @@ import {
   HiLightBulb,
 } from "react-icons/hi";
 
+const SECTION_CARDS = [
+  {
+    titleKey: "servicesPage.section1.title" as const,
+    itemsKey: "servicesPage.section1.items" as const,
+    icon: HiBriefcase,
+    accent: "border-l-primary text-primary",
+  },
+  {
+    titleKey: "servicesPage.section2.title" as const,
+    itemsKey: "servicesPage.section2.items" as const,
+    icon: HiDocument,
+    accent: "border-l-secondary text-secondary",
+  },
+  {
+    titleKey: "servicesPage.whyChoose.title" as const,
+    itemsKey: "servicesPage.whyChoose.items" as const,
+    icon: HiLightningBolt,
+    accent: "border-l-primary text-primary",
+  },
+  {
+    titleKey: "servicesPage.whyDifferent.title" as const,
+    itemsKey: "servicesPage.whyDifferent.items" as const,
+    icon: HiLightBulb,
+    accent: "border-l-secondary text-secondary",
+  },
+];
+
 const ServicesPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 text-white py-16 px-4">
-      <div className="max-w-7xl mx-auto pt-24">
-        {/* Page Title */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold bg-linear-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+    <div className="page-mesh min-h-screen px-4 py-10 sm:px-6 md:py-16">
+      <div className="mx-auto max-w-7xl pt-4 md:pt-8">
+        <div className="mb-12 text-center md:mb-16">
+          <h1 className="bg-linear-to-r from-primary via-foreground to-secondary bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl md:text-5xl">
             {t("servicesPage.title")}
           </h1>
         </div>
 
-        {/* Introduction Card */}
-        <div className="mb-8">
+        <div className="mb-8 md:mb-10">
           <div
-            className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 text-right leading-relaxed text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:bg-white/15"
+            className="card-surface p-6 text-right text-base leading-relaxed text-muted-foreground shadow-sm sm:p-8 sm:text-lg"
             dir="rtl"
           >
             <p>{t("servicesPage.intro")}</p>
           </div>
         </div>
 
-        {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Section 1 Card */}
-          <div
-            className="bg-linear-to-br from-purple-600 to-blue-600 backdrop-blur-lg rounded-2xl p-8 border border-purple-400 text-right leading-relaxed shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-            dir="rtl"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-500 rounded-full shrink-0">
-                <HiBriefcase className="w-6 h-6 text-purple-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-purple-200">
-                {t("servicesPage.section1.title")}
-              </h3>
-            </div>
-            <ul className="space-y-3">
-              {(
-                t("servicesPage.section1.items", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((item: string, index: number) => (
-                <li key={index} className="flex items-start">
-                  <span className="inline-block w-2 h-2 bg-purple-400 rounded-full mt-2 ml-3 shrink-0"></span>
-                  <span className="text-gray-200">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Section 2 Card */}
-          <div
-            className="bg-linear-to-br from-blue-600 to-cyan-600 backdrop-blur-lg rounded-2xl p-8 border border-blue-400 text-right leading-relaxed shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-            dir="rtl"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500 rounded-full shrink-0">
-                <HiDocument className="w-6 h-6 text-blue-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-blue-200">
-                {t("servicesPage.section2.title")}
-              </h3>
-            </div>
-            <ul className="space-y-3">
-              {(
-                t("servicesPage.section2.items", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((item: string, index: number) => (
-                <li key={index} className="flex items-start">
-                  <span className="inline-block w-2 h-2 bg-blue-400 rounded-full mt-2 ml-3 shrink-0"></span>
-                  <span className="text-gray-200">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {SECTION_CARDS.slice(0, 2).map((s) => (
+            <ServiceCard
+              key={s.titleKey}
+              title={t(s.titleKey)}
+              items={t(s.itemsKey, { returnObjects: true }) as string[]}
+              icon={s.icon}
+              accent={s.accent}
+            />
+          ))}
         </div>
 
-        {/* Section 3 Card */}
-        <div className="mb-8">
-          <div
-            className="bg-linear-to-br from-emerald-600 to-teal-600 backdrop-blur-lg rounded-2xl p-8 border border-emerald-400 text-right leading-relaxed shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-            dir="rtl"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-500 rounded-full shrink-0">
-                <HiCheckCircle className="w-6 h-6 text-emerald-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-emerald-200">
-                {t("servicesPage.section3.title")}
-              </h3>
-            </div>
-            <ul className="space-y-3">
-              {(
-                t("servicesPage.section3.items", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((item: string, index: number) => (
-                <li key={index} className="flex items-start">
-                  <span className="inline-block w-2 h-2 bg-emerald-400 rounded-full mt-2 ml-3 shrink-0"></span>
-                  <span className="text-gray-200">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-6 md:mt-8">
+          <ServiceCard
+            title={t("servicesPage.section3.title")}
+            items={t("servicesPage.section3.items", {
+              returnObjects: true,
+            }) as string[]}
+            icon={HiCheckCircle}
+            accent="border-l-accent text-accent"
+            fullWidth
+          />
         </div>
 
-        {/* Why Choose & Why Different Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Why Choose Card */}
-          <div
-            className="bg-linear-to-br from-orange-600 to-red-600 backdrop-blur-lg rounded-2xl p-8 border border-orange-400 text-right leading-relaxed shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-            dir="rtl"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-500 rounded-full shrink-0">
-                <HiLightningBolt className="w-6 h-6 text-orange-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-orange-200">
-                {t("servicesPage.whyChoose.title")}
-              </h3>
-            </div>
-            <ul className="space-y-3">
-              {(
-                t("servicesPage.whyChoose.items", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((item: string, index: number) => (
-                <li key={index} className="flex items-start">
-                  <span className="inline-block w-2 h-2 bg-orange-400 rounded-full mt-2 ml-3 shrink-0"></span>
-                  <span className="text-gray-200">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Why Different Card */}
-          <div
-            className="bg-linear-to-br from-pink-600 to-rose-600 backdrop-blur-lg rounded-2xl p-8 border border-pink-400 text-right leading-relaxed shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-            dir="rtl"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-pink-500 rounded-full shrink-0">
-                <HiLightBulb className="w-6 h-6 text-pink-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-pink-200">
-                {t("servicesPage.whyDifferent.title")}
-              </h3>
-            </div>
-            <ul className="space-y-3">
-              {(
-                t("servicesPage.whyDifferent.items", {
-                  returnObjects: true,
-                }) as string[]
-              ).map((item: string, index: number) => (
-                <li key={index} className="flex items-start">
-                  <span className="inline-block w-2 h-2 bg-pink-400 rounded-full mt-2 ml-3 shrink-0"></span>
-                  <span className="text-gray-200">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-6 grid grid-cols-1 gap-6 md:mt-8 lg:grid-cols-2">
+          {SECTION_CARDS.slice(2).map((s) => (
+            <ServiceCard
+              key={s.titleKey}
+              title={t(s.titleKey)}
+              items={t(s.itemsKey, { returnObjects: true }) as string[]}
+              icon={s.icon}
+              accent={s.accent}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
 };
+
+function ServiceCard({
+  title,
+  items,
+  icon: Icon,
+  accent,
+  fullWidth,
+}: {
+  title: string;
+  items: string[];
+  icon: ComponentType<{ className?: string }>;
+  accent: string;
+  fullWidth?: boolean;
+}) {
+  return (
+    <div
+      className={`card-surface border-l-4 p-6 text-right shadow-sm sm:p-8 ${accent} ${
+        fullWidth ? "lg:col-span-2" : ""
+      }`}
+      dir="rtl"
+    >
+      <div className="mb-6 flex items-start gap-4">
+        <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-muted ring-1 ring-border">
+          <Icon className="h-6 w-6 text-foreground" />
+        </div>
+        <h3 className="text-xl font-bold text-card-foreground sm:text-2xl">
+          {title}
+        </h3>
+      </div>
+      <ul className="space-y-3">
+        {items.map((item: string, index: number) => (
+          <li key={index} className="flex items-start gap-3">
+            <span className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+            <span className="text-muted-foreground">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default ServicesPage;

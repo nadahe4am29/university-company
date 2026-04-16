@@ -1,5 +1,157 @@
 @import "tailwindcss";
 
+/* Design tokens — light / dark (toggle `.dark` on <html> in App) */
+:root {
+  --background: #f6f3ee;
+  --foreground: #141118;
+  --card: #ffffff;
+  --card-foreground: #141118;
+  --primary: #5b2dcc;
+  --primary-hover: #4a24a8;
+  --primary-foreground: #faf8ff;
+  --secondary: #0f766e;
+  --secondary-foreground: #ecfeff;
+  --muted: #ebe6df;
+  --muted-foreground: #5a5364;
+  --accent: #ea580c;
+  --accent-soft: #fff4ed;
+  --border: #ddd5ca;
+  --ring: #7c3aed;
+  --surface-elevated: #ffffff;
+  --gradient-blob-a: rgba(91, 45, 204, 0.12);
+  --gradient-blob-b: rgba(15, 118, 110, 0.1);
+  --gradient-blob-c: rgba(234, 88, 12, 0.08);
+}
+
+.dark {
+  --background: #07060a;
+  --foreground: #f3f0f8;
+  --card: #12101a;
+  --card-foreground: #f3f0f8;
+  --primary: #a78bfa;
+  --primary-hover: #c4b5fd;
+  --primary-foreground: #1e1035;
+  --secondary: #2dd4bf;
+  --secondary-foreground: #042f2e;
+  --muted: #1a1724;
+  --muted-foreground: #9d94ab;
+  --accent: #fb923c;
+  --accent-soft: rgba(251, 146, 60, 0.12);
+  --border: #2a2538;
+  --ring: #a78bfa;
+  --surface-elevated: #16141f;
+  --gradient-blob-a: rgba(167, 139, 250, 0.15);
+  --gradient-blob-b: rgba(45, 212, 191, 0.1);
+  --gradient-blob-c: rgba(251, 146, 60, 0.08);
+}
+
+@theme inline {
+  --font-sans:
+    "Plus Jakarta Sans", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-surface-elevated: var(--surface-elevated);
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  ::selection {
+    @apply bg-primary/25 text-foreground;
+  }
+}
+
+/* Page mesh backdrop (subtle grid + blobs) */
+.page-mesh {
+  background-image:
+    linear-gradient(to bottom, var(--background) 0%, transparent 32%),
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      var(--gradient-blob-a),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 0%,
+      var(--gradient-blob-b),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 0% 100%,
+      var(--gradient-blob-c),
+      transparent
+    ),
+    linear-gradient(
+        var(--border) 1px,
+        transparent 1px
+      )
+      0 0 / 48px 48px;
+}
+
+.dark .page-mesh {
+  background-image:
+    linear-gradient(to bottom, var(--background) 0%, transparent 40%),
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      var(--gradient-blob-a),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 0%,
+      var(--gradient-blob-b),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 0% 100%,
+      var(--gradient-blob-c),
+      transparent
+    ),
+    linear-gradient(
+        color-mix(in oklab, var(--border) 40%, transparent) 1px,
+        transparent 1px
+      )
+      0 0 / 56px 56px;
+}
+
+/* Form controls (theme-aware) */
+.input-field {
+  @apply w-full rounded-xl border border-border bg-card px-4 py-3.5 text-card-foreground placeholder:text-muted-foreground shadow-sm transition-colors focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30;
+}
+
+.input-field option {
+  @apply bg-card text-card-foreground;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:bg-primary-hover focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-muted/80 px-6 py-3.5 font-semibold text-foreground transition hover:bg-muted focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-border bg-card/90 text-card-foreground shadow-sm backdrop-blur-md;
+}
+
 @keyframes bgScroll {
   from {
     background-position: 0% 50%;
@@ -41,19 +193,19 @@
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn 0.14s ease-out;
 }
 
 .animate-blob {
-  animation: blob 18s infinite ease-in-out;
+  animation: blob 11s infinite ease-in-out;
 }
 
 .animation-delay-2000 {
-  animation-delay: 2s;
+  animation-delay: 1.2s;
 }
 
 .animation-delay-4000 {
-  animation-delay: 4s;
+  animation-delay: 2.4s;
 }
 
 /* RTL Support */

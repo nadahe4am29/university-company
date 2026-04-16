@@ -12,10 +12,16 @@ const resources = {
   },
 };
 
+function syncDocumentLanguage(lng: string) {
+  const isAr = lng.startsWith("ar");
+  document.documentElement.lang = isAr ? "ar" : "en";
+  document.documentElement.dir = isAr ? "rtl" : "ltr";
+}
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en", // default language
-  fallbackLng: "en",
+  lng: "ar",
+  fallbackLng: "ar",
 
   interpolation: {
     escapeValue: false, // React already escapes
@@ -25,5 +31,8 @@ i18n.use(initReactI18next).init({
     useSuspense: false,
   },
 });
+
+i18n.on("languageChanged", syncDocumentLanguage);
+syncDocumentLanguage(i18n.language);
 
 export default i18n;

@@ -40,7 +40,6 @@ export default function JobDetails() {
       } catch (error) {
         console.error("Error fetching job details:", error);
 
-        // If job ID matches our constant job, show the constant job details
         if (id === "UG-726-01") {
           setJob({
             _id: "UG-726-01",
@@ -76,85 +75,78 @@ export default function JobDetails() {
 
   if (!job) {
     return (
-      <div className="relative min-h-screen bg-[#1a1f2e] flex items-center justify-center">
-        <div className="relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-white/70">{t("common.loadingJobDetails")}</p>
-          </div>
+      <div className="page-mesh flex min-h-[calc(100dvh-8rem)] items-center justify-center">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <p className="text-muted-foreground">{t("common.loadingJobDetails")}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-[#1a1f2e] text-white overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-linear-to-br from-indigo-400/10 via-slate-800 to-emerald-400/10" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-300/10 rounded-full blur-[180px] animate-blob" />
-        <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-emerald-300/10 rounded-full blur-[180px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-200px] right-1/4 w-[600px] h-[600px] bg-purple-300/8 rounded-full blur-[180px] animate-blob animation-delay-4000" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        {/* Breadcrumb */}
-        <nav className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-white/50">
-            <span className="hover:text-white transition-colors cursor-pointer">
+    <div className="page-mesh relative min-h-screen overflow-hidden pb-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12">
+        <nav className="mb-8" aria-label="Breadcrumb">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="transition hover:text-foreground"
+            >
               {t("jobDetails.backToJobs")}
-            </span>
-            <span>›</span>
-            <span className="text-white/70">{job.title}</span>
+            </button>
+            <span aria-hidden>›</span>
+            <span className="text-foreground">{job.title}</span>
           </div>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* LEFT – MAIN CONTENT */}
-          <div className="lg:col-span-8 space-y-8">
-            {/* Header Card */}
-            <div className="relative bg-black/30 backdrop-blur-md rounded-3xl border border-white/10 p-10 overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-indigo-500/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="space-y-6 lg:col-span-8 lg:space-y-8">
+            <div className="card-surface relative overflow-hidden p-8 sm:p-10">
+              <div className="absolute -right-8 -top-8 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
 
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <h1 className="text-4xl md:text-5xl font-extrabold leading-tight bg-linear-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+                <div className="mb-6 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0 flex-1">
+                    <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
                       {job.title}
                     </h1>
                   </div>
-                  <div className="ml-6">
-                    <div className="w-16 h-16 bg-linear-to-br from-indigo-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-xl">
-                      <span className="text-2xl">💼</span>
-                    </div>
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-secondary text-2xl shadow-lg">
+                    💼
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3 mb-8">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 border border-white/20">
-                    <span className="text-indigo-400">📍</span>
-                    <span className="text-white/90">{job.location}</span>
+                <div className="mb-8 flex flex-wrap gap-2 sm:gap-3">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/80 px-3 py-2 text-sm sm:px-4">
+                    <span className="text-primary" aria-hidden>
+                      📍
+                    </span>
+                    <span>{job.location}</span>
                   </div>
 
                   {job.jobType && (
-                    <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 backdrop-blur-sm px-4 py-2 border border-emerald-500/30">
-                      <span>💼</span>
-                      <span className="text-emerald-300">{job.jobType}</span>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-3 py-2 text-sm text-secondary sm:px-4">
+                      <span aria-hidden>💼</span>
+                      <span>{job.jobType}</span>
                     </div>
                   )}
 
                   {job.experience && (
-                    <div className="inline-flex items-center gap-2 rounded-full bg-purple-500/20 backdrop-blur-sm px-4 py-2 border border-purple-500/30">
-                      <span>🧠</span>
-                      <span className="text-purple-300">{job.experience}</span>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-3 py-2 text-sm text-accent sm:px-4">
+                      <span aria-hidden>🧠</span>
+                      <span>{job.experience}</span>
                     </div>
                   )}
                 </div>
 
                 {job.salary && (
-                  <div className="inline-flex items-center gap-3 rounded-2xl bg-linear-to-r from-emerald-500/20 to-indigo-500/20 backdrop-blur-sm px-6 py-3 border border-emerald-500/30">
-                    <span className="text-2xl">💰</span>
-                    <span className="text-emerald-300 font-semibold text-lg">
+                  <div className="inline-flex items-center gap-3 rounded-2xl border border-border bg-muted/50 px-5 py-3">
+                    <span className="text-2xl" aria-hidden>
+                      💰
+                    </span>
+                    <span className="text-lg font-semibold text-secondary">
                       {job.salary}
                     </span>
                   </div>
@@ -162,54 +154,52 @@ export default function JobDetails() {
               </div>
             </div>
 
-            {/* Description Card */}
-            <div className="bg-black/30 backdrop-blur-md rounded-3xl border border-white/10 p-10">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center">
-                  <span className="text-xl">📋</span>
+            <div className="card-surface p-8 sm:p-10">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-xl">
+                  📋
                 </div>
-                <h2 className="text-2xl font-bold text-white">
+                <h2 className="text-xl font-bold text-foreground sm:text-2xl">
                   {t("jobDetails.description")}
                 </h2>
               </div>
 
-              <div className="prose prose-invert max-w-none">
+              <div className="prose prose-neutral max-w-none dark:prose-invert">
                 <p
-                  className="text-white/80 leading-8 text-[15px] whitespace-pre-line break-word"
-                  style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
+                  className="whitespace-pre-line break-words text-[15px] leading-relaxed text-muted-foreground"
+                  style={{ overflowWrap: "anywhere" }}
                 >
                   {job.description}
                 </p>
               </div>
             </div>
 
-            {/* Additional Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-black/30 backdrop-blur-md rounded-2xl border border-white/10 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center">
-                    <span>🎯</span>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="card-surface p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                    🎯
                   </div>
-                  <h3 className="text-lg font-semibold">
+                  <h3 className="text-lg font-semibold text-foreground">
                     {t("jobDetails.requirements")}
                   </h3>
                 </div>
-                <p className="text-white/60 text-sm">
-                  We're looking for candidates who match the qualifications and
-                  can contribute to our team's success.
+                <p className="text-sm text-muted-foreground">
+                  We&apos;re looking for candidates who match the qualifications
+                  and can contribute to our team&apos;s success.
                 </p>
               </div>
 
-              <div className="bg-black/30 backdrop-blur-md rounded-2xl border border-white/10 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                    <span>🚀</span>
+              <div className="card-surface p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary/10">
+                    🚀
                   </div>
-                  <h3 className="text-lg font-semibold">
+                  <h3 className="text-lg font-semibold text-foreground">
                     {t("jobDetails.growth")}
                   </h3>
                 </div>
-                <p className="text-white/60 text-sm">
+                <p className="text-sm text-muted-foreground">
                   Join a team that values professional development and career
                   advancement.
                 </p>
@@ -217,48 +207,48 @@ export default function JobDetails() {
             </div>
           </div>
 
-          {/* RIGHT – APPLY CARD */}
           <div className="lg:col-span-4">
-            <div className="sticky top-8 space-y-6">
-              {/* Apply Now Card */}
-              <div className="relative bg-linear-to-br from-indigo-500/20 to-emerald-500/20 backdrop-blur-md rounded-3xl border border-white/20 p-8 overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-indigo-400/30 to-transparent rounded-full blur-2xl"></div>
+            <div className="sticky top-28 space-y-6">
+              <div className="card-surface relative overflow-hidden border-primary/20 p-8">
+                <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-primary/15 blur-2xl" />
 
                 <div className="relative z-10">
-                  <div className="text-center mb-8">
-                    <div className="w-20 h-20 bg-linear-to-br from-indigo-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                      <span className="text-3xl">🎉</span>
+                  <div className="mb-8 text-center">
+                    <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-secondary text-3xl shadow-lg">
+                      🎉
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">
+                    <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">
                       {t("jobDetails.readyToApply")}
                     </h3>
-                    <p className="text-white/70 text-sm">
+                    <p className="text-sm text-muted-foreground">
                       {t("jobDetails.takeNextStep")}
                     </p>
                   </div>
 
                   <button
+                    type="button"
                     onClick={handleApply}
-                    className="w-full rounded-2xl bg-linear-to-r from-indigo-600 to-emerald-600 py-4 text-white text-lg font-semibold hover:from-indigo-700 hover:to-emerald-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02]"
+                    className="btn-primary w-full py-4 text-base"
                   >
                     {t("jobDetails.applyNow")}
                   </button>
 
                   <div className="mt-3">
                     <button
+                      type="button"
                       onClick={handleShare}
-                      className="w-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 py-3 text-white text-sm font-medium hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="btn-secondary w-full py-3 text-sm"
                     >
-                      <FiShare2 className="w-4 h-4" />
+                      <FiShare2 className="h-4 w-4" />
                       {showShareMessage ? "تم نسخ الرابط!" : "مشاركة الرابط"}
                     </button>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-center gap-4 text-xs text-white/50">
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <span>✓</span> No CV required
                     </span>
-                    <span>•</span>
+                    <span aria-hidden>•</span>
                     <span className="flex items-center gap-1">
                       <span>✓</span> Quick process
                     </span>
@@ -266,33 +256,32 @@ export default function JobDetails() {
                 </div>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="bg-black/30 backdrop-blur-md rounded-2xl border border-white/10 p-6">
-                <h4 className="text-sm font-semibold text-white/70 mb-4">
+              <div className="card-surface p-6">
+                <h4 className="mb-4 text-sm font-semibold text-muted-foreground">
                   Why Apply With Us
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-indigo-500/20 rounded-lg flex items-center justify-center shrink-0">
-                      <span className="text-xs">🔒</span>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs">
+                      🔒
                     </div>
-                    <span className="text-white/60 text-sm">
+                    <span className="text-sm text-muted-foreground">
                       Secure application process
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center shrink-0">
-                      <span className="text-xs">⚡</span>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary/10 text-xs">
+                      ⚡
                     </div>
-                    <span className="text-white/60 text-sm">
+                    <span className="text-sm text-muted-foreground">
                       Instant response
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center shrink-0">
-                      <span className="text-xs">🌟</span>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-xs">
+                      🌟
                     </div>
-                    <span className="text-white/60 text-sm">
+                    <span className="text-sm text-muted-foreground">
                       Verified opportunities
                     </span>
                   </div>

@@ -3,34 +3,25 @@ import { useTranslation } from "react-i18next";
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "ar" : "en";
-    i18n.changeLanguage(newLang);
+  const isEnglish = i18n.language.startsWith("en");
 
-    // Update document direction for RTL/LTR support
-    document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = newLang;
+  const toggleLanguage = () => {
+    i18n.changeLanguage(isEnglish ? "ar" : "en");
   };
 
   return (
     <button
+      type="button"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors text-white"
+      className="flex items-center gap-2 rounded-xl border border-border bg-muted/80 px-3 py-2 text-sm font-semibold text-foreground transition hover:bg-muted"
     >
-      <span className="text-sm font-medium">
-        {i18n.language === "en" ? "العربية" : "English"}
+      <span>{isEnglish ? "العربية" : "English"}</span>
+      <span
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground"
+        aria-hidden
+      >
+        {isEnglish ? "EN" : "AR"}
       </span>
-      <div className="w-6 h-6 rounded-full overflow-hidden">
-        {i18n.language === "en" ? (
-          <div className="w-full h-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
-            EN
-          </div>
-        ) : (
-          <div className="w-full h-full bg-green-600 flex items-center justify-center text-white text-xs font-bold">
-            AR
-          </div>
-        )}
-      </div>
     </button>
   );
 };

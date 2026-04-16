@@ -30,7 +30,6 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
       .get(endpoint)
       .then((res) => res.data)
       .then((data: Job[]) => {
-        // If no jobs from backend, show constant job for qualified positions
         if (data.length === 0 && jobType === "qualified") {
           setJobs([
             {
@@ -49,7 +48,6 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
       })
       .catch((err) => {
         console.error(`Error fetching ${jobType} jobs:`, err);
-        // If backend fails, show constant job for qualified positions
         if (jobType === "qualified") {
           setJobs([
             {
@@ -69,59 +67,59 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
   }, [jobType, t]);
 
   return (
-    <section className="relative py-20 bg-black/55 w-full border-t border-white/10 h-screen">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-white">
+    <section className="relative w-full py-8 sm:py-12">
+      <div className="mb-8 text-center sm:mb-10">
+        <h2 className="text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
           {t("approvedJobs.title")}
         </h2>
-        <p className="text-gray-400 mt-2 text-lg">
+        <p className="mt-2 text-base text-muted-foreground sm:text-lg">
           {t("approvedJobs.subtitle")}
         </p>
       </div>
 
-      {/* Loading */}
       {loading && (
-        <p className="text-center text-gray-400">{t("approvedJobs.loading")}</p>
+        <p className="text-center text-muted-foreground">
+          {t("approvedJobs.loading")}
+        </p>
       )}
 
-      {/* Empty state */}
       {!loading && jobs.length === 0 && (
-        <p className="text-center text-gray-400">{t("approvedJobs.noJobs")}</p>
+        <p className="text-center text-muted-foreground">
+          {t("approvedJobs.noJobs")}
+        </p>
       )}
 
-      {/* Jobs Grid */}
-      <div className="w-full mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3 p-4">
+      <div className="mx-auto grid w-full max-w-7xl gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
         {jobs.map((job) => (
-          <div
+          <article
             key={job._id}
-            className="bg-slate-900/90 backdrop-blur-md border border-white/10
-             rounded-2xl p-6 shadow-lg hover:shadow-2xl
-             hover:-translate-y-1 transition-all duration-200"
+            className="card-surface flex flex-col p-6 transition hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-lg"
           >
-            <h3 className="text-2xl font-semibold text-white mb-3">
+            <h3 className="mb-3 text-xl font-semibold text-card-foreground">
               {job.title}
             </h3>
 
-            <div className="flex items-center text-gray-400 mb-4">
-              <FaMapPin className="w-5 h-5 text-red-500 mr-2" />
+            <div className="mb-4 flex items-center gap-2 text-muted-foreground">
+              <FaMapPin className="h-4 w-4 shrink-0 text-accent" />
               <span className="text-sm">{job.location}</span>
             </div>
 
-            <p className="text-gray-300 text-start mb-6 line-clamp-2">
+            <p className="mb-6 line-clamp-3 flex-1 text-start text-sm leading-relaxed text-muted-foreground">
               {job.description}
             </p>
 
             <button
+              type="button"
               onClick={() =>
                 navigate(`/jobs/${job._id}`, {
                   state: { isQualified: jobType === "qualified" },
                 })
               }
-              className="cursor-pointer w-full rounded-xl bg-black/80 text-white py-3 px-4 font-medium hover:bg-black transition-colors duration-200"
+              className="btn-primary w-full py-3 text-sm"
             >
               {t("approvedJobs.viewDetails")}
             </button>
-          </div>
+          </article>
         ))}
       </div>
     </section>

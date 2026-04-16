@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import JobDetails from "./components/JobDetails";
 import QualificationPage from "./pages/QualificationPage";
@@ -10,35 +11,68 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicesPage";
 import Header from "./components/Header";
+import WhatsAppFab from "./components/WhatsAppFab";
 
-function AppWithNavbar({ children }: { children: React.ReactNode }) {
+type Theme = "light" | "dark";
+
+function AppWithNavbar({
+  children,
+  theme,
+  toggleTheme,
+}: {
+  children: React.ReactNode;
+  theme: Theme;
+  toggleTheme: () => void;
+}) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#1a1f2e] text-white flex flex-col">
-      <Header />
-      <main className="grow">{children}</main>
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <main className="grow pt-24 sm:pt-28">{children}</main>
       <Footer />
     </div>
   );
 }
 
 export default function App() {
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme);
+    } else if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  };
+
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#1a1f2e] text-white flex flex-col">
+      <WhatsAppFab />
+      <div className="flex min-h-screen flex-col bg-background">
         <Routes>
           <Route
             path="/"
             element={
-              <>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <QualificationPage />
-                <Footer />
-              </>
+              </AppWithNavbar>
             }
           />
           <Route
             path="/qualified-home"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <QualifiedHome />
               </AppWithNavbar>
             }
@@ -46,7 +80,7 @@ export default function App() {
           <Route
             path="/unqualified-home"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <UnqualifiedHome />
               </AppWithNavbar>
             }
@@ -54,7 +88,7 @@ export default function App() {
           <Route
             path="/post-job"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <PostJobPage />
               </AppWithNavbar>
             }
@@ -62,7 +96,7 @@ export default function App() {
           <Route
             path="/about"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <AboutPage />
               </AppWithNavbar>
             }
@@ -70,7 +104,7 @@ export default function App() {
           <Route
             path="/contact"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <ContactPage />
               </AppWithNavbar>
             }
@@ -78,7 +112,7 @@ export default function App() {
           <Route
             path="/services"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <ServicesPage />
               </AppWithNavbar>
             }
@@ -86,7 +120,7 @@ export default function App() {
           <Route
             path="/jobs/:id"
             element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <JobDetails />
               </AppWithNavbar>
             }
@@ -94,39 +128,7 @@ export default function App() {
           <Route
             path="/apply/:id"
             element={
-              <AppWithNavbar>
-                <ApplyPage />
-              </AppWithNavbar>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <AppWithNavbar>
-                <ContactPage />
-              </AppWithNavbar>
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <AppWithNavbar>
-                <ServicesPage />
-              </AppWithNavbar>
-            }
-          />
-          <Route
-            path="/jobs/:id"
-            element={
-              <AppWithNavbar>
-                <JobDetails />
-              </AppWithNavbar>
-            }
-          />
-          <Route
-            path="/apply/:id"
-            element={
-              <AppWithNavbar>
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
                 <ApplyPage />
               </AppWithNavbar>
             }

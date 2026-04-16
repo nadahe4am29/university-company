@@ -126,46 +126,38 @@ export default function ApplyPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#1a1f2e] text-white overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-linear-to-br from-indigo-400/10 via-slate-800 to-emerald-400/10" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-300/10 rounded-full blur-[180px] animate-blob" />
-        <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-emerald-300/10 rounded-full blur-[180px] animate-blob animation-delay-2000" />
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
+    <div className="page-mesh relative min-h-screen overflow-hidden pb-16">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 py-10 sm:px-6 md:py-12">
+        <div className="mb-10 text-center md:mb-12">
           <button
+            type="button"
             onClick={() => navigate(-1)}
-            className="mb-8 inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            className="mb-8 inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
           >
             <span>←</span>
             <span>{t("common.back")}</span>
           </button>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="mb-4 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
             {t("applyPage.title")}
           </h1>
 
-          {/* Progress Steps */}
-          <div className="flex justify-center items-center gap-4 mb-8">
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
             {[1, 2, 3, ...(isQualified ? [4] : [])].map((step) => (
               <div key={step} className="flex items-center">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
+                  className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all sm:h-10 sm:w-10 ${
                     currentStep >= step
-                      ? "bg-linear-to-r from-indigo-600 to-emerald-600 text-white"
-                      : "bg-white/20 text-white/50"
+                      ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {step}
                 </div>
                 {step <= (isQualified ? 3 : 2) && (
                   <div
-                    className={`w-12 h-1 mx-2 transition-all ${
-                      currentStep > step ? "bg-indigo-600" : "bg-white/20"
+                    className={`mx-1 h-1 w-8 rounded-full transition-all sm:mx-2 sm:w-12 ${
+                      currentStep > step ? "bg-primary" : "bg-muted"
                     }`}
                   />
                 )}
@@ -174,11 +166,10 @@ export default function ApplyPage() {
           </div>
         </div>
 
-        {/* Form Container */}
-        <div className="relative bg-black/30 backdrop-blur-md rounded-3xl border border-white/10 p-10">
+        <div className="card-surface p-6 sm:p-8 md:p-10">
           {currentStep === 1 && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-right">
+              <h2 className="mb-6 text-right text-2xl font-bold text-foreground">
                 {t("applyPage.steps.basicInfo")}
               </h2>
 
@@ -192,7 +183,7 @@ export default function ApplyPage() {
                     placeholder={t("applyPage.basicInfo.name")}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -206,7 +197,7 @@ export default function ApplyPage() {
                     placeholder={t("applyPage.basicInfo.birthdate")}
                     value={birthdate}
                     onChange={(e) => setBirthdate(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -218,24 +209,24 @@ export default function ApplyPage() {
                   <select
                     value={maritalStatus}
                     onChange={(e) => setMaritalStatus(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-12 py-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-right appearance-none"
+                    className="input-field appearance-none pr-12 pl-12 text-right"
                     dir="rtl"
                   >
-                    <option value="" disabled className="bg-black/30">
+                    <option value="" disabled className="bg-card">
                       الحالة الاجتماعية *
                     </option>
-                    <option value="أعزب" className="bg-black/30">
+                    <option value="أعزب" className="bg-card">
                       أعزب
                     </option>
-                    <option value="متزوج" className="bg-black/30">
+                    <option value="متزوج" className="bg-card">
                       متزوج
                     </option>
-                    <option value="غير ذلك" className="bg-black/30">
+                    <option value="غير ذلك" className="bg-card">
                       غير ذلك
                     </option>
                   </select>
                   <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <IoChevronDown className="w-5 h-5 text-white/60" />
+                    <IoChevronDown className="h-5 w-5 text-muted-foreground" />
                   </div>
                 </div>
 
@@ -246,94 +237,96 @@ export default function ApplyPage() {
                   <select
                     value={placeOfResidence}
                     onChange={(e) => setPlaceOfResidence(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-12 py-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-right appearance-none"
+                    className="input-field appearance-none pr-12 pl-12 text-right"
                     dir="rtl"
                   >
                     <option value="" disabled>
                       محل الإقامة *
                     </option>
-                    <option value="القاهرة" className="bg-black/30">
+                    <option value="القاهرة" className="bg-card">
                       القاهرة
                     </option>
-                    <option value="الجيزة" className="bg-black/30">
+                    <option value="الجيزة" className="bg-card">
                       الجيزة
                     </option>
-                    <option value="الإسكندرية" className="bg-black/30">
+                    <option value="الإسكندرية" className="bg-card">
                       الإسكندرية
                     </option>
-                    <option value="الدقهلية" className="bg-black/30">
+                    <option value="الدقهلية" className="bg-card">
                       الدقهلية
                     </option>
-                    <option value="الشرقية" className="bg-black/30">
+                    <option value="الشرقية" className="bg-card">
                       الشرقية
                     </option>
-                    <option value="الدلتا" className="bg-black/30">
+                    <option value="الدلتا" className="bg-card">
                       الدلتا
                     </option>
-                    <option value="كفر الشيخ" className="bg-black/30">
+                    <option value="كفر الشيخ" className="bg-card">
                       كفر الشيخ
                     </option>
-                    <option value="الفيوم" className="bg-black/30">
+                    <option value="الفيوم" className="bg-card">
                       الفيوم
                     </option>
-                    <option value="بني سويف" className="bg-black/30">
+                    <option value="بني سويف" className="bg-card">
                       بني سويف
                     </option>
-                    <option value="المنيا" className="bg-black/30">
+                    <option value="المنيا" className="bg-card">
                       المنيا
                     </option>
-                    <option value="الأقصر" className="bg-black/30">
+                    <option value="الأقصر" className="bg-card">
                       الأقصر
                     </option>
-                    <option value="أسوان" className="bg-black/30">
+                    <option value="أسوان" className="bg-card">
                       أسوان
                     </option>
-                    <option value="البحر الأحمر" className="bg-black/30">
+                    <option value="البحر الأحمر" className="bg-card">
                       البحر الأحمر
                     </option>
-                    <option value="الوادي الجديد" className="bg-black/30">
+                    <option value="الوادي الجديد" className="bg-card">
                       الوادي الجديد
                     </option>
-                    <option value="مطروح" className="bg-black/30">
+                    <option value="مطروح" className="bg-card">
                       مطروح
                     </option>
-                    <option value="شمال سيناء" className="bg-black/30">
+                    <option value="شمال سيناء" className="bg-card">
                       شمال سيناء
                     </option>
-                    <option value="جنوب سيناء" className="bg-black/30">
+                    <option value="جنوب سيناء" className="bg-card">
                       جنوب سيناء
                     </option>
                   </select>
                   <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <IoChevronDown className="w-5 h-5 text-white/60" />
+                    <IoChevronDown className="h-5 w-5 text-muted-foreground" />
                   </div>
                 </div>
 
                 <div className="relative">
                   <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                    <span className="text-yellow-400">�</span>
+                    <span className="text-accent" aria-hidden>
+                      💼
+                    </span>
                   </div>
                   <input
                     type="text"
                     placeholder="الوظيفة الحالية / المسمى الوظيفي *"
                     value={currentJob}
                     onChange={(e) => setCurrentJob(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
 
-                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl">
+                <div className="card-surface flex items-center gap-3 p-4">
                   <input
                     type="checkbox"
                     id="drivingLicense"
                     checked={hasDrivingLicense}
                     onChange={(e) => setHasDrivingLicense(e.target.checked)}
-                    className="w-5 h-5 rounded border-white/20 bg-white/10 text-indigo-600 focus:ring-2 focus:ring-indigo-500/50"
+                    className="h-5 w-5 rounded border-border text-primary focus:ring-2 focus:ring-ring"
                   />
                   <label
                     htmlFor="drivingLicense"
-                    className="text-white/90 cursor-pointer"
+                    className="cursor-pointer text-foreground"
                   >
                     هل لديك رخصة قيادة؟ *
                   </label>
@@ -347,30 +340,30 @@ export default function ApplyPage() {
                     <select
                       value={licenseType}
                       onChange={(e) => setLicenseType(e.target.value)}
-                      className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-12 py-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 text-right appearance-none"
+                      className="input-field appearance-none pr-12 pl-12 text-right"
                       dir="rtl"
                     >
-                      <option value="" disabled className="bg-black/30">
+                      <option value="" disabled className="bg-card">
                         نوع الرخصة
                       </option>
-                      <option value="خاصة" className="bg-black/30">
+                      <option value="خاصة" className="bg-card">
                         خاصة
                       </option>
-                      <option value="ثالثة" className="bg-black/30">
+                      <option value="ثالثة" className="bg-card">
                         ثالثة
                       </option>
-                      <option value="ثانية" className="bg-black/30">
+                      <option value="ثانية" className="bg-card">
                         ثانية
                       </option>
-                      <option value="أولى" className="bg-black/30">
+                      <option value="أولى" className="bg-card">
                         أولى
                       </option>
-                      <option value="دراجة نارية" className="bg-black/30">
+                      <option value="دراجة نارية" className="bg-card">
                         دراجة نارية
                       </option>
                     </select>
                     <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                      <IoChevronDown className="w-5 h-5 text-white/60" />
+                      <IoChevronDown className="h-5 w-5 text-muted-foreground" />
                     </div>
                   </div>
                 )}
@@ -380,7 +373,7 @@ export default function ApplyPage() {
 
           {currentStep === 2 && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-right">
+              <h2 className="mb-6 text-right text-2xl font-bold text-foreground">
                 بيانات التواصل
               </h2>
 
@@ -395,7 +388,7 @@ export default function ApplyPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     maxLength={11}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -409,7 +402,7 @@ export default function ApplyPage() {
                     placeholder="البريد الإلكتروني *"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -419,7 +412,7 @@ export default function ApplyPage() {
 
           {currentStep === 3 && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-right">التعليم</h2>
+              <h2 className="mb-6 text-right text-2xl font-bold text-foreground">التعليم</h2>
 
               <div className="space-y-6">
                 <div className="relative">
@@ -429,33 +422,33 @@ export default function ApplyPage() {
                   <select
                     value={educationLevel}
                     onChange={(e) => setEducationLevel(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-12 py-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-right appearance-none"
+                    className="input-field appearance-none pr-12 pl-12 text-right"
                     dir="rtl"
                   >
-                    <option value="" disabled className="bg-black/30">
+                    <option value="" disabled className="bg-card">
                       المستوى التعليمي *
                     </option>
-                    <option value="ثانوي عام" className="bg-black/30">
+                    <option value="ثانوي عام" className="bg-card">
                       بدون مؤهل
                     </option>
-                    <option value="ثانوي عام" className="bg-black/30">
+                    <option value="ثانوي عام" className="bg-card">
                       ثانوي عام
                     </option>
-                    <option value="دبلوم" className="bg-black/30">
+                    <option value="دبلوم" className="bg-card">
                       دبلوم
                     </option>
-                    <option value="بكالوريوس" className="bg-black/30">
+                    <option value="بكالوريوس" className="bg-card">
                       بكالوريوس
                     </option>
-                    <option value="ماجستير" className="bg-black/30">
+                    <option value="ماجستير" className="bg-card">
                       ماجستير
                     </option>
-                    <option value="دكتوراه" className="bg-black/30">
+                    <option value="دكتوراه" className="bg-card">
                       دكتوراه
                     </option>
                   </select>
                   <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <IoChevronDown className="w-5 h-5 text-white/60" />
+                    <IoChevronDown className="h-5 w-5 text-muted-foreground" />
                   </div>
                 </div>
 
@@ -468,7 +461,7 @@ export default function ApplyPage() {
                     placeholder="اسم المدرسة/الجامعة *"
                     value={schoolName}
                     onChange={(e) => setSchoolName(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -482,7 +475,7 @@ export default function ApplyPage() {
                     placeholder="التخصص *"
                     value={specialization}
                     onChange={(e) => setSpecialization(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-pink-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -496,7 +489,7 @@ export default function ApplyPage() {
                     placeholder="سنة التخرج *"
                     value={graduationYear}
                     onChange={(e) => setGraduationYear(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -510,7 +503,7 @@ export default function ApplyPage() {
                     placeholder="التقدير *"
                     value={grade}
                     onChange={(e) => setGrade(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -520,7 +513,7 @@ export default function ApplyPage() {
 
           {currentStep === 4 && isQualified && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-right">
+              <h2 className="mb-6 text-right text-2xl font-bold text-foreground">
                 معلومات إضافية
               </h2>
 
@@ -534,7 +527,7 @@ export default function ApplyPage() {
                     placeholder="الدرجة العلمية العليا *"
                     value={higherDegree}
                     onChange={(e) => setHigherDegree(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -548,7 +541,7 @@ export default function ApplyPage() {
                     placeholder="مكان الحصول على الدرجة *"
                     value={degreePlace}
                     onChange={(e) => setDegreePlace(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -562,7 +555,7 @@ export default function ApplyPage() {
                     placeholder="تخصص الدرجة العليا *"
                     value={degreeSpecialization}
                     onChange={(e) => setDegreeSpecialization(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-pink-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -576,7 +569,7 @@ export default function ApplyPage() {
                     placeholder="سنة الحصول على الدرجة *"
                     value={degreeYear}
                     onChange={(e) => setDegreeYear(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -590,7 +583,7 @@ export default function ApplyPage() {
                     placeholder="تقدير الدرجة العليa *"
                     value={degreeGrade}
                     onChange={(e) => setDegreeGrade(e.target.value)}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 text-right"
+                    className="input-field pr-12 text-right"
                     dir="rtl"
                   />
                 </div>
@@ -604,10 +597,10 @@ export default function ApplyPage() {
                       type="file"
                       accept=".pdf,.doc,.docx"
                       onChange={(e) => setCvFile(e.target.files?.[0] || null)}
-                      className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl pr-12 pl-4 py-4 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                      className="input-field pr-12 text-right file:mr-4 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary-foreground hover:file:bg-primary-hover"
                       required
                     />
-                    <label className="block text-white/70 text-sm mt-2 text-right">
+                    <label className="mt-2 block text-right text-sm text-muted-foreground">
                       يرجى إرفاق السيرة الذاتية (PDF, DOC, DOCX) *
                     </label>
                   </div>
@@ -621,7 +614,7 @@ export default function ApplyPage() {
             <button
               onClick={prevStep}
               disabled={currentStep === 1}
-              className="px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-secondary px-6 py-3 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Previous
             </button>
@@ -630,7 +623,7 @@ export default function ApplyPage() {
               <button
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="px-6 py-3 rounded-2xl bg-linear-to-r from-indigo-600 to-emerald-600 text-white font-semibold hover:from-indigo-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary px-6 py-3 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Next
               </button>
@@ -638,7 +631,7 @@ export default function ApplyPage() {
               <button
                 onClick={handleSubmit}
                 disabled={!isStepValid() || isSubmitting}
-                className="px-6 py-3 rounded-2xl bg-linear-to-r from-indigo-600 to-emerald-600 text-white font-semibold hover:from-indigo-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary px-6 py-3 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </button>
