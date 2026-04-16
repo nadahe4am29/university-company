@@ -8,6 +8,8 @@ import logo from "../assets/logo.jpeg";
 import ImageSlider from "../components/ImageSlider";
 import { useIsRtl } from "../hooks/useIsRtl";
 import LogoCarousel from "../components/LogoSlider";
+import logo2 from "../assets/logo/hero2.png";
+import logo3 from "../assets/logo/hero3.png";
 
 const SNAPPY_SPRING = {
   type: "spring" as const,
@@ -24,11 +26,7 @@ const QualificationPage = () => {
   const isRtl = useIsRtl();
 
   // Hero slider images
-  const heroImages = [
-    "/src/assets/logo/2.png",
-    "/src/assets/2.png",
-    "/src/assets/3.png",
-  ];
+  const heroImages = ["../assets/logo/2.png", logo2, logo3];
 
   const headerVariants: Variants = {
     hidden: { y: -50, opacity: 0 },

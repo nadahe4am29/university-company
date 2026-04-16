@@ -1,13 +1,13 @@
 const LogoCarousel = () => {
   const logos = [
-    "/src/assets/logo/3.png",
-    "/src/assets/logo/4.png",
-    "/src/assets/logo/5.png",
-    "/src/assets/logo/6.png",
-    "/src/assets/logo/7.png",
-    "/src/assets/logo/8.png",
-    "/src/assets/logo/9.png",
-    "/src/assets/logo/10.png",
+    "../assets/logo/3.png",
+    "../assets/logo/4.png",
+    "../assets/logo/5.png",
+    "../assets/logo/6.png",
+    "../assets/logo/7.png",
+    "../assets/logo/8.png",
+    "../assets/logo/9.png",
+    "../assets/logo/10.png",
   ];
 
   return (
