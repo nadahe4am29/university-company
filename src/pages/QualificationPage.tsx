@@ -1,16 +1,18 @@
 //page
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { FaUserTie, FaBuilding, FaArrowRight } from "react-icons/fa";
-import logo from "../assets/logo.jpeg";
+import { FaArrowRight } from "react-icons/fa";
 import ImageSlider from "../components/ImageSlider";
-import { useIsRtl } from "../hooks/useIsRtl";
+// import { useIsRtl } from "../hooks/useIsRtl";
 import LogoCarousel from "../components/LogoSlider";
 import logo2 from "../assets/logo/hero2.png";
 import logo3 from "../assets/logo/hero3.png";
+import AnimatedCounter from "../components/AnimatedCounter";
+import ContactForm from "../components/ContactForm";
+import LatestJobs from "../components/LatestJobs";
 
 const SNAPPY_SPRING = {
   type: "spring" as const,
@@ -24,7 +26,7 @@ const QualificationPage = () => {
     useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const isRtl = useIsRtl();
+  // const isRtl = useIsRtl();
 
   // Hero slider images
   const heroImages = ["../assets/logo/2.png", logo2, logo3];
@@ -38,29 +40,29 @@ const QualificationPage = () => {
     },
   };
 
-  const leftCardVariants: Variants = useMemo(() => {
-    const m = isRtl ? -1 : 1;
-    return {
-      hidden: { x: -60 * m, opacity: 0 },
-      visible: {
-        x: 0,
-        opacity: 1,
-        transition: { ...SNAPPY_SPRING, delay: 0.07 },
-      },
-    };
-  }, [isRtl]);
+  // const leftCardVariants: Variants = useMemo(() => {
+  //   const m = isRtl ? -1 : 1;
+  //   return {
+  //     hidden: { x: -60 * m, opacity: 0 },
+  //     visible: {
+  //       x: 0,
+  //       opacity: 1,
+  //       transition: { ...SNAPPY_SPRING, delay: 0.07 },
+  //     },
+  //   };
+  // }, [isRtl]);
 
-  const rightCardVariants: Variants = useMemo(() => {
-    const m = isRtl ? -1 : 1;
-    return {
-      hidden: { x: 60 * m, opacity: 0 },
-      visible: {
-        x: 0,
-        opacity: 1,
-        transition: { ...SNAPPY_SPRING, delay: 0.12 },
-      },
-    };
-  }, [isRtl]);
+  // const rightCardVariants: Variants = useMemo(() => {
+  //   const m = isRtl ? -1 : 1;
+  //   return {
+  //     hidden: { x: 60 * m, opacity: 0 },
+  //     visible: {
+  //       x: 0,
+  //       opacity: 1,
+  //       transition: { ...SNAPPY_SPRING, delay: 0.12 },
+  //     },
+  //   };
+  // }, [isRtl]);
 
   return (
     <div className="page-mesh relative min-h-screen overflow-hidden">
@@ -83,12 +85,12 @@ const QualificationPage = () => {
             animate="visible"
             className="max-w-4xl px-4 text-center text-white sm:px-6"
           >
-            <div className="mb-6 inline-block rounded-2xl border border-white/30 bg-white/20 p-1 shadow-lg backdrop-blur-sm ring-1 ring-white/60">
-              <img
+            <div>
+              {/* <img
                 src={logo}
                 alt="logo"
                 className="h-20 w-20 rounded-xl object-contain sm:h-24 sm:w-24"
-              />
+              /> */}
             </div>
             <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-4xl md:text-5xl">
               {t("qualificationPage.title")}
@@ -116,8 +118,120 @@ const QualificationPage = () => {
         </div>
       </section>
 
+      {/* Latest Jobs and Contact Form Section */}
+      <section className="relative z-10 px-4 py-16 sm:px-6">
+        <div className="mx-auto">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-10">
+            {/* Latest Jobs Columns */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="lg:col-span-6"
+            >
+              <LatestJobs />
+            </motion.div>
+
+            {/* Contact Form Columns */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="lg:col-span-4 text-center"
+            >
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-foreground mb-4 md:text-3xl">
+                  تواصل معنا
+                </h2>
+                <p className="text-muted-foreground">
+                  هل لديك أي استفسارات؟ لا تتردد في التواصل معنا. فريقنا جاهز
+                  لمساعدتك في أي وقت.
+                </p>
+              </div>
+
+              <ContactForm />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="relative z-10 px-4 py-16 sm:px-6">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('../assets/logo/1.png')" }}
+        >
+          <div className="absolute inset-0 bg-linear-to-br from-primary/20 via-primary/10 to-transparent backdrop-blur-sm"></div>
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+                +<AnimatedCounter end={300} duration={2.5} />
+              </div>
+              <div className="text-sm font-medium text-white sm:text-base">
+                شركات
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+                +<AnimatedCounter end={50} duration={3} />K
+              </div>
+              <div className="text-sm font-medium text-white sm:text-base">
+                عدد المستخدمين
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+                +<AnimatedCounter end={18} duration={2.8} />
+              </div>
+              <div className="text-sm font-medium text-white sm:text-base">
+                سنة خبرة
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+                <AnimatedCounter end={759} duration={2.3} />
+              </div>
+              <div className="text-sm font-medium text-white sm:text-base">
+                فرصة عمل
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
-      <section className="relative z-10 flex min-h-[calc(100vh-60vh)] flex-col items-center justify-center px-4 py-16 sm:px-6">
+      {/* <section className="relative z-10 flex min-h-[calc(100vh-60vh)] flex-col items-center justify-center px-4 py-16 sm:px-6">
         <div className="relative z-10 grid w-full max-w-4xl gap-5 sm:grid-cols-2 sm:gap-6">
           <motion.div
             variants={leftCardVariants}
@@ -173,7 +287,7 @@ const QualificationPage = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Success Partners Section */}
       <section className="relative z-10 px-4 pb-16 sm:px-6 md:pb-24">
