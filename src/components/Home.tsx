@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import background from "../assets/background.png";
 import type { Job } from "./ApprovedJobs";
+import background from "../assets/images/background.jpg";
 
 const Home = () => {
   const [jobTitles, setJobTitles] = useState<string[]>([]);

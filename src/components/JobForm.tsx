@@ -84,6 +84,7 @@ const JobForm = ({
   return (
     <form
       onSubmit={handleSubmit}
+      data-testid="post-job-form"
       className="card-surface mx-auto max-w-xl space-y-5 p-6 sm:p-8"
     >
       <div className="flex items-center justify-between gap-4">

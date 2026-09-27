@@ -5,12 +5,18 @@ interface AnimatedCounterProps {
   end: number;
   duration?: number;
   className?: string;
+  locale?: string;
+  prefix?: string;
+  suffix?: string;
 }
 
 const AnimatedCounter = ({
   end,
   duration = 2,
   className = "",
+  locale,
+  prefix = "",
+  suffix = "",
 }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +56,7 @@ const AnimatedCounter = ({
       transition={{ duration: 0.5, delay: 0.2 }}
       className={className}
     >
-      {count.toLocaleString()}
+      {`${prefix}${count.toLocaleString(locale)}${suffix}`}
     </motion.span>
   );
 };

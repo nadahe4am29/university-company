@@ -1,53 +1,63 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Design tokens — light / dark (toggle `.dark` on <html> in App) */
 :root {
-  --background: #f6f3ee;
-  --foreground: #141118;
+  --background: #e8eef6;
+  --foreground: #0b111e;
   --card: #ffffff;
-  --card-foreground: #141118;
-  --primary: #5b2dcc;
-  --primary-hover: #4a24a8;
-  --primary-foreground: #faf8ff;
-  --secondary: #0f766e;
-  --secondary-foreground: #ecfeff;
-  --muted: #ebe6df;
-  --muted-foreground: #5a5364;
-  --accent: #ea580c;
-  --accent-soft: #fff4ed;
-  --border: #ddd5ca;
-  --ring: #7c3aed;
+  --card-foreground: #0b111e;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --secondary: #1d4ed8;
+  --secondary-foreground: #ffffff;
+  --muted: #dce6f3;
+  --muted-foreground: #4b5565;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --border: #c5d0e0;
+  --ring: #2563eb;
   --surface-elevated: #ffffff;
-  --gradient-blob-a: rgba(91, 45, 204, 0.12);
-  --gradient-blob-b: rgba(15, 118, 110, 0.1);
-  --gradient-blob-c: rgba(234, 88, 12, 0.08);
+  --section: #dfe7f2;
+  --hero-from: hsl(222, 60%, 18%);
+  --hero-mid: hsl(218, 65%, 28%);
+  --hero-to: hsl(222, 60%, 18%);
+  --hero-gradient: linear-gradient(
+    to right,
+    var(--hero-from) 0%,
+    var(--hero-mid) 50%,
+    var(--hero-to) 100%
+  );
+  --navy-950: #0b111e;
+  --navy-900: #121a2b;
+  --navy-800: #2b3446;
 }
 
 .dark {
-  --background: #07060a;
-  --foreground: #f3f0f8;
-  --card: #12101a;
-  --card-foreground: #f3f0f8;
-  --primary: #a78bfa;
-  --primary-hover: #c4b5fd;
-  --primary-foreground: #1e1035;
-  --secondary: #2dd4bf;
-  --secondary-foreground: #042f2e;
-  --muted: #1a1724;
-  --muted-foreground: #9d94ab;
-  --accent: #fb923c;
-  --accent-soft: rgba(251, 146, 60, 0.12);
-  --border: #2a2538;
-  --ring: #a78bfa;
-  --surface-elevated: #16141f;
-  --gradient-blob-a: rgba(167, 139, 250, 0.15);
-  --gradient-blob-b: rgba(45, 212, 191, 0.1);
-  --gradient-blob-c: rgba(251, 146, 60, 0.08);
+  --background: #0b111e;
+  --foreground: #f4f7fb;
+  --card: #121a2b;
+  --card-foreground: #f4f7fb;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #60a5fa;
+  --secondary-foreground: #0b111e;
+  --muted: #121a2b;
+  --muted-foreground: #9aa6b8;
+  --accent: #3b82f6;
+  --accent-soft: rgba(59, 130, 246, 0.15);
+  --border: #2b3446;
+  --ring: #3b82f6;
+  --surface-elevated: #121a2b;
+  --section: #121a2b;
 }
 
 @theme inline {
-  --font-sans:
-    "Plus Jakarta Sans", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Cairo", "Plus Jakarta Sans", "Noto Sans Arabic", ui-sans-serif,
+    system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -64,11 +74,23 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-surface-elevated: var(--surface-elevated);
+  --color-section: var(--section);
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
 }
 
 @layer base {
   html {
     @apply scroll-smooth antialiased;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
   }
 
   body {
@@ -80,60 +102,21 @@
   }
 }
 
-/* Page mesh backdrop (subtle grid + blobs) */
-.page-mesh {
-  background-image:
-    linear-gradient(to bottom, var(--background) 0%, transparent 32%),
-    radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      var(--gradient-blob-a),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 100% 0%,
-      var(--gradient-blob-b),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 35% at 0% 100%,
-      var(--gradient-blob-c),
-      transparent
-    ),
-    linear-gradient(
-        var(--border) 1px,
-        transparent 1px
-      )
-      0 0 / 48px 48px;
+.hero-gradient {
+  background: var(--hero-gradient);
 }
 
-.dark .page-mesh {
-  background-image:
-    linear-gradient(to bottom, var(--background) 0%, transparent 40%),
-    radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      var(--gradient-blob-a),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 100% 0%,
-      var(--gradient-blob-b),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 35% at 0% 100%,
-      var(--gradient-blob-c),
-      transparent
-    ),
-    linear-gradient(
-        color-mix(in oklab, var(--border) 40%, transparent) 1px,
-        transparent 1px
-      )
-      0 0 / 56px 56px;
+.btn-signin {
+  background: var(--hero-gradient);
+}
+
+.page-mesh {
+  background: var(--background);
 }
 
 /* Form controls (theme-aware) */
 .input-field {
-  @apply w-full rounded-xl border border-border bg-card px-4 py-3.5 text-card-foreground placeholder:text-muted-foreground shadow-sm transition-colors focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30;
+  @apply w-full rounded-xl border border-border bg-card px-4 py-3.5 text-card-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/30 focus:outline-none;
 }
 
 .input-field option {
@@ -141,15 +124,40 @@
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:bg-primary-hover focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-muted/80 px-6 py-3.5 font-semibold text-foreground transition hover:bg-muted focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-muted/80 px-6 py-3.5 font-semibold text-foreground transition hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline;
 }
 
 .card-surface {
   @apply rounded-2xl border border-border bg-card/90 text-card-foreground shadow-sm backdrop-blur-md;
+}
+
+.page-shell {
+  @apply bg-background px-4 py-12 text-foreground sm:px-6 md:py-16;
+}
+
+.soft-card {
+  @apply rounded-lg border border-border bg-card text-card-foreground shadow-[0_1px_3px_rgba(11,17,30,0.06)];
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--hero-gradient);
+  color: #fff;
+}
+
+.field-input {
+  @apply w-full appearance-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary/50;
+}
+
+.home-card {
+  @apply rounded-2xl border border-border bg-card p-6 shadow-none;
 }
 
 @keyframes bgScroll {
@@ -164,6 +172,40 @@
 
 .animate-bgScroll {
   animation: bgScroll 30s linear infinite;
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partners-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.partners-track {
+  animation: partners-marquee 32s linear infinite;
+}
+
+.partners-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-track {
+    animation: none;
+  }
 }
 
 @keyframes blob {

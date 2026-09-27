@@ -25,6 +25,246 @@
     "whatsappChat": "Chat on WhatsApp",
     "jobs": "Jobs"
   },
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "services": "Our Services",
+    "register": "Register now",
+    "privacy": "Privacy Policy"
+  },
+  "jobsPage": {
+    "title": "Available Jobs",
+    "searchPlaceholder": "Search for a job...",
+    "allCities": "All cities",
+    "allSectors": "All sectors",
+    "availableCount": "{{count}} jobs available",
+    "learnMore": "Learn more",
+    "applyNow": "Apply now",
+    "noJobs": "No jobs match your search"
+  },
+  "homePage": {
+    "hero": {
+      "titleLine1": "Al-Gamaa is the strongest bridge",
+      "titleLine2": "and the leading destination for international recruitment",
+      "subtitle": "Start your career journey now, whether you are a job seeker or an employer looking for talent — we are here to serve you",
+      "jobSeeker": "I am a job seeker",
+      "employer": "I am an employer"
+    },
+    "stats": {
+      "employees": "placed professionals",
+      "years": "years in the market",
+      "clients": "strategic clients"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "An integrated system of services that covers all your needs",
+      "items": {
+        "recruitment": {
+          "title": "International Recruitment",
+          "points": [
+            "Attracting top Egyptian talent",
+            "Precise selection by standards",
+            "Smart interviews",
+            "Full logistical support"
+          ]
+        },
+        "visas": {
+          "title": "Visas & Consular Services",
+          "points": [
+            "Completing visa procedures",
+            "Electronic authorization",
+            "Biometric appointment booking",
+            "File review"
+          ]
+        },
+        "attestation": {
+          "title": "International Attestation",
+          "points": [
+            "Certificate attestation",
+            "Document attestation",
+            "Contract attestation",
+            "International accreditation"
+          ]
+        },
+        "musaned": {
+          "title": "Musaned Platform",
+          "points": [
+            "Safe recruitment",
+            "Reserved execution",
+            "Full guarantees",
+            "Ongoing support"
+          ]
+        }
+      }
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The pillars of success we build every achievement on",
+      "items": {
+        "trust": {
+          "title": "Trust",
+          "description": "Our clients’ trust is our greatest asset, earned through a strict commitment to providing talent that precisely matches the highest standards."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "We adopt innovative operating strategies and modern digital solutions that deliver our clients’ targets in record time and at the highest performance."
+        },
+        "success": {
+          "title": "Success",
+          "description": "Our journey has been crowned by placing more than 50,000 Egyptian professionals, achievements that positioned us as a leader in overseas manpower recruitment."
+        }
+      }
+    },
+    "why": {
+      "title": "Why do business owners choose us?",
+      "items": [
+        "Speed of execution",
+        "Continuous support",
+        "Official credibility",
+        "Absolute transparency",
+        "High efficiency",
+        "Geographic coverage"
+      ]
+    },
+    "partners": {
+      "title": "Success Partners"
+    }
+  },
+  "footer": {
+    "headline": "Fifty thousand success stories and more started here",
+    "subheadline": "Join our partners and build your future with the strongest bridge for international recruitment",
+    "companyName": "Al-Gamaa Company for the Recruitment of Egyptian Manpower Abroad",
+    "license": "License No. 726",
+    "quickLinks": "Quick links",
+    "followUs": "Follow us",
+    "contactUs": "Contact us",
+    "phone": "01100611116",
+    "email": "info@algamaa.com.eg",
+    "address": "26 El-Sadat, Al-Nozha, Nasr City, Cairo",
+    "copyright": "All rights reserved to Al-Gamaa Company"
+  },
+  "faqPage": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions",
+    "searchPlaceholder": "Search questions...",
+    "noResults": "No questions match your search",
+    "categories": {
+      "all": "All",
+      "seekers": "Job seekers",
+      "employers": "Employers",
+      "general": "General",
+      "visas": "Visas"
+    },
+    "items": [
+      {
+        "category": "seekers",
+        "q": "Are there fees the traveler pays to apply for jobs?",
+        "a": "We are fully transparent. Administrative fees are set according to Egyptian law and signed agreements, and no amounts are collected except within approved official procedures."
+      },
+      {
+        "category": "seekers",
+        "q": "How do I know the status of my application after registering?",
+        "a": "Once your CV matches an open job request, the recruitment team will contact you by phone or WhatsApp to schedule an interview."
+      },
+      {
+        "category": "visas",
+        "q": "Does the company only complete travel procedures without recruitment?",
+        "a": "Yes. We provide visa clearance and consular attestation even if the contract was signed directly between you and the employer."
+      },
+      {
+        "category": "employers",
+        "q": "How long does it take to provide talent?",
+        "a": "We submit a shortlist of candidates within 3 to 7 working days. Travel time then depends on the occupation and consular regulations."
+      },
+      {
+        "category": "employers",
+        "q": "Do you guarantee the selected talent?",
+        "a": "Yes. We guarantee the worker’s competence and conduct throughout the 90-day probation period, and we compensate if they are not a fit."
+      },
+      {
+        "category": "employers",
+        "q": "How do you verify the skills of technical workers?",
+        "a": "We have equipped specialized testing centers, and we also let the employer interview by video conference or visit our Cairo office."
+      },
+      {
+        "category": "seekers",
+        "q": "What documents are required to apply?",
+        "a": "Applications require a CV, a copy of the academic qualification, a copy of the passport, and experience certificates if available."
+      },
+      {
+        "category": "seekers",
+        "q": "Can I cancel my application after registering?",
+        "a": "Yes. You can cancel your request at any time before official procedures begin by contacting the recruitment team."
+      },
+      {
+        "category": "general",
+        "q": "Which countries are available for recruitment?",
+        "a": "We currently focus on the Kingdom of Saudi Arabia and the Gulf countries."
+      }
+    ]
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "updated": "Last updated:",
+    "updatedDate": "24 August 2026",
+    "intro": "Al-Gamaa for the Deployment of Egyptian Labor Abroad is committed to protecting your privacy. This policy explains how we collect, use, and share your information when you use our website.",
+    "sections": [
+      {
+        "title": "Information we collect",
+        "items": [
+          "Personal information you provide voluntarily, such as name, phone number, email, address, and educational qualifications.",
+          "Files you upload through the site, such as a CV or other employment documents.",
+          "Device and browser information, such as browser type, operating system, and IP address, to improve your experience."
+        ]
+      },
+      {
+        "title": "How we use information",
+        "items": [
+          "Assessing job applications and managing the nomination process for available roles.",
+          "Contacting you about job opportunities, inquiries, or service updates.",
+          "Improving site performance and developing our services to match user needs.",
+          "Complying with applicable legal and regulatory obligations."
+        ]
+      },
+      {
+        "title": "Data sharing",
+        "items": [
+          "We do not sell or rent your personal data to any third party.",
+          "We may share information with employers or competent government authorities only when necessary to complete the recruitment process.",
+          "We use trusted service providers to host the site and manage data, and they are bound by confidentiality and privacy agreements."
+        ]
+      },
+      {
+        "title": "Data security",
+        "items": [
+          "We use encryption and secure connections (HTTPS) to protect data in transit.",
+          "We apply technical and organizational measures to limit unauthorized access to your data.",
+          "Despite our efforts, no internet transmission can be guaranteed as completely secure; please keep your account details confidential."
+        ]
+      },
+      {
+        "title": "User rights",
+        "items": [
+          "The right to access your personal data and request a copy of it.",
+          "The right to correct any inaccurate or incomplete information.",
+          "The right to request deletion of your data, subject to legal retention obligations.",
+          "The right to object to some processing methods or withdraw your consent at any time."
+        ]
+      },
+      {
+        "title": "Contact us",
+        "items": [
+          "If you have any question or request about this privacy policy, you can contact us via:",
+          "Email: info@algamaa.com.eg",
+          "Phone: 01100611116",
+          "Address: 26 El-Sadat, Al-Nozha, Nasr City, Cairo, Egypt"
+        ]
+      }
+    ]
+  },
   "qualificationPage": {
     "title": "Choose Your Path",
     "subtitle": "Select the option that best describes your professional background and let us find the perfect opportunities for you",
@@ -93,27 +333,38 @@
     }
   },
   "applyPage": {
-    "title": "Job Application",
+    "title": "Job Seeker Registration",
+    "subtitle": "Start your future in the Kingdom",
+    "submit": "Submit application",
     "steps": {
-      "basicInfo": "Basic Information",
-      "contactInfo": "Contact Information",
+      "personal": "Personal and contact details",
       "education": "Education",
-      "additionalInfo": "Additional Information"
+      "experience": "Experience and skills",
+      "documents": "Upload documents"
     },
     "basicInfo": {
-      "name": "Full Name",
-      "birthdate": "Date of Birth",
-      "maritalStatus": "Marital Status",
-      "placeOfResidence": "Place of Residence",
-      "currentJob": "Current Job",
-      "drivingLicense": "Do you have a driving license?",
-      "licenseType": "License Type",
+      "name": "Full name",
+      "namePlaceholder": "Enter your full name",
+      "birthdate": "Date of birth",
+      "maritalStatus": "Marital status",
+      "placeOfResidence": "Place of residence (governorate)",
+      "currentJob": "Current job",
+      "currentJobPlaceholder": "Current job title",
+      "drivingLicense": "Driving license",
+      "passport": "Do you have a passport?",
+      "select": "Select",
+      "selectGovernorate": "Select governorate",
+      "single": "Single",
+      "married": "Married",
+      "other": "Other",
       "yes": "Yes",
       "no": "No"
     },
     "contactInfo": {
-      "phone": "Phone Number",
-      "email": "Email Address"
+      "phone": "Phone number (WhatsApp)",
+      "phonePlaceholder": "01XXXXXXXXX",
+      "email": "Email (optional)",
+      "emailPlaceholder": "email@example.com"
     },
     "education": {
       "educationLevel": "Education Level",
@@ -122,12 +373,21 @@
       "graduationYear": "Graduation Year",
       "grade": "Grade/GPA"
     },
+    "experience": {
+      "years": "Years of experience",
+      "employmentStatus": "Current employment status",
+      "statusCompany": "Currently employed (company / organization)",
+      "statusFreelance": "Currently self-employed / freelance",
+      "statusAvailable": "Not working / available to travel",
+      "currentCompany": "Current company name",
+      "lastCompany": "Last company (if any)",
+      "workStartDate": "Start date",
+      "workStartDateAlt": "Work start date",
+      "workEndDate": "End date",
+      "skills": "Technical skills",
+      "skillsPlaceholder": "Example: Excel, SAP, Photoshop, AutoCAD"
+    },
     "additionalInfo": {
-      "higherDegree": "Higher Degree",
-      "degreePlace": "Degree Institution",
-      "degreeSpecialization": "Degree Specialization",
-      "degreeYear": "Degree Year",
-      "degreeGrade": "Degree Grade",
       "cvUpload": "Upload CV",
       "submitting": "Submitting..."
     }
@@ -161,17 +421,25 @@
   },
   "jobDetails": {
     "title": "Job Details",
-    "location": "Location",
-    "employmentType": "Employment Type",
-    "salary": "Salary",
-    "experience": "Experience Level",
-    "description": "Description",
-    "requirements": "Key Requirements",
-    "growth": "Growth Opportunity",
-    "readyToApply": "Ready to Apply?",
-    "takeNextStep": "Take the next step in your career journey",
-    "applyNow": "Apply Now",
-    "backToJobs": "Back to Jobs"
+    "service": "Service",
+    "description": "Job description",
+    "requirements": "Requirements",
+    "benefits": "Job benefits",
+    "share": "Share",
+    "favorite": "Save",
+    "linkCopied": "Link copied",
+    "defaultBenefits": [
+      "Housing",
+      "Airfare",
+      "Annual tickets",
+      "Comprehensive medical insurance"
+    ],
+    "contact": {
+      "title": "Quick contact",
+      "contracts": "Contracts",
+      "development": "Development",
+      "email": "Email"
+    }
   },
   "approvedJobs": {
     "title": "Find a Job",
@@ -181,46 +449,92 @@
     "viewDetails": "View Details"
   },
   "aboutPage": {
-    "title": "About the Company",
-    "subtitle": "The strongest bridge and the leading destination for international recruitment",
+    "title": "The strongest bridge and the leading destination for international recruitment",
     "intro": {
-      "p1": "We are Al-Jamia Company for the Recruitment of Egyptian Manpower Abroad (LLC), operating under the Egyptian Ministry of Manpower license No. (726). We are proud to be the trusted strategic partner for leading institutions and prominent business leaders in the Kingdom of Saudi Arabia.",
-      "p2": "Our company was established to lead the human resources sector. We specialize in selecting and recruiting top Egyptian talent and supporting the Saudi market with professional cadres that contribute effectively to achieving Saudi Vision 2030. At “Al-Jamia,” we do not stop at recruitment—we build sustainable partnerships founded on competence, integrity, and absolute professionalism."
+      "p1": "We are Al-Gamaa Company for the Placement of Egyptian Manpower Abroad (LLC), operating under Egyptian Ministry of Manpower license No. (726). We are proud to be the trusted strategic partner of leading institutions and business leaders in the Kingdom of Saudi Arabia.",
+      "p2": "Our company was founded to lead the human resources sector. We specialize in selecting and placing top Egyptian talent, and supporting the Saudi market with professional cadres who contribute effectively to Vision 2030.",
+      "p3": "At Al-Gamaa we do not stop at recruitment — we build lasting partnerships founded on competence, integrity, and absolute professionalism."
     },
     "coreValues": {
-      "title": "Our Core Values - Pillars of Success",
+      "title": "Our core values — pillars of success",
       "items": [
         {
-          "title": "Trust (Our solemn covenant)",
-          "description": "Our clients’ trust is our greatest asset, earned through our strict commitment to providing talent that precisely matches the highest required standards and specifications."
+          "title": "Trust — our solemn covenant",
+          "description": "Our clients’ trust is our most valuable asset, earned through a strict commitment to providing talent that precisely matches the highest required standards."
         },
         {
-          "title": "Excellence (Our practical approach)",
-          "description": "Our management adopts innovative operational strategies and modern digital solutions, ensuring smooth, professional processing of all transactions while maintaining institutional performance standards."
+          "title": "Excellence — our practical approach",
+          "description": "Our management adopts innovative operating strategies and modern digital solutions that deliver client targets in record time and at the highest institutional performance."
         },
         {
-          "title": "Success (The language of numbers)",
-          "description": "We are proud to be the first choice for major companies in the Kingdom. Our journey has been crowned by employing more than 50,000 Egyptian professionals, achieving milestones that positioned us as a leader in overseas manpower recruitment."
+          "title": "Success — the language of numbers",
+          "description": "We are proud to be the first choice for major organizations in the Kingdom. Our journey has placed more than 50,000 Egyptian professionals, putting us at the forefront of overseas manpower recruitment."
         }
       ]
     },
     "whyChooseUs": {
-      "title": "Why do business owners choose us?",
+      "title": "Why do employers choose us?",
       "items": [
-        "Speed of execution: We have an integrated workflow to complete all legal and administrative procedures in record time.",
-        "Continuous support: Our commitment does not end at contracting; we support both client and candidate from the first moment until successful placement and stability at the workplace.",
-        "Official credibility: Extensive experience and a strong track record under full supervision of the Ministry of Manpower and the competent authorities."
+        {
+          "title": "Speed of execution",
+          "description": "We run an integrated workflow that completes consular procedures in record time."
+        },
+        {
+          "title": "Ongoing support",
+          "description": "Our commitment does not end at contracting; we stay with the client and the candidate from day one until they settle successfully in the workplace."
+        },
+        {
+          "title": "Official credibility",
+          "description": "Long-standing experience and a proven record of success under the full supervision of the Ministry of Manpower and the competent authorities."
+        }
       ]
+    },
+    "closing": {
+      "title": "Closing note",
+      "body": "Al-Gamaa Company for the Placement of Egyptian Manpower Abroad (license 726) puts decades of experience to work, delivering innovative HR solutions that connect the ambition of Egyptian talent with the needs of the Saudi market — with full commitment to transparency and professionalism."
     }
   },
   "contactPage": {
-    "title": "Contact Us",
-    "subtitle": "Get in touch with our team",
+    "title": "Contact us",
+    "subtitle": "We're here to listen — whether you are an employer or an ambitious professional",
+    "formTitle": "Send us a message",
+    "infoTitle": "Contact information",
+    "hq": {
+      "title": "Head office",
+      "address": "26 El-Sadat, Al-Nozha, Nasr City, Cairo Governorate 4442650, Egypt"
+    },
+    "hours": {
+      "title": "Working hours",
+      "value": "Sunday – Thursday: 10:00 AM – 7:00 PM"
+    },
+    "phones": {
+      "title": "Phone numbers",
+      "contracts": "Contracts & employers",
+      "seekers": "Job seekers",
+      "consular": "Consular services",
+      "contractsNumber": "01100611116",
+      "seekersNumber": "01004787942",
+      "consularNumber": "0223822840"
+    },
+    "emailLabel": "Email",
+    "email": "info@algamaa.com.eg",
     "form": {
-      "name": "Full Name",
-      "email": "Email Address",
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "email@example.com",
+      "type": "Message type",
+      "types": {
+        "inquiry": "Inquiry",
+        "seeker": "Job seeker",
+        "employer": "Employer",
+        "consular": "Consular services"
+      },
       "message": "Message",
-      "submit": "Send Message"
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send message",
+      "sending": "Sending...",
+      "success": "Your message was sent successfully"
     }
   },
   "constantJob": {
@@ -231,51 +545,51 @@
     "experience": "5+ Years"
   },
   "servicesPage": {
-    "title": "Our Services",
-    "intro": "At Al-Jamia Company, we provide an integrated system of services specifically designed to meet the aspirations of business owners and facilitate the journey of Egyptian talents through three main pillars:",
+    "title": "Our services",
+    "subtitle": "An integrated set of services designed to meet employers’ needs and support the journey of Egyptian talent",
+    "contactUs": "Contact us",
+    "cta": {
+      "title": "Fifty thousand success stories started here",
+      "subtitle": "Join our partners and build your future with the strongest bridge for international recruitment",
+      "button": "Work with us now"
+    },
     "section1": {
-      "title": "1. International Recruitment & Workforce Deployment Solutions",
+      "title": "International recruitment and workforce placement",
       "items": [
-        "We follow a strategic methodology that professionally manages the full recruitment cycle:",
-        "Elite Talent Acquisition: Precise selection of candidates based on merit standards and alignment with Saudi and international labor market requirements.",
-        "Smart Interview Management: Fully equipped interview halls or remote interview management through advanced video conferencing systems.",
-        "Comprehensive Logistical Support: Step-by-step guidance from contract signing and medical examinations to travel arrangements and reception.",
-        "Musaned Platform Services: Full specialization in completing domestic labor recruitment procedures (individuals) with direct electronic integration to ensure rapid execution."
+        "We act as a strategic partner managing the full recruitment cycle professionally",
+        "Elite sourcing: precise selection based on merit and labor-market requirements",
+        "Smart interviews: equipped halls or remote video-conference interviews",
+        "End-to-end logistics: from contracting and medicals through travel arrangements",
+        "Musaned services: domestic-worker procedures with direct electronic integration"
       ]
     },
     "section2": {
-      "title": "2. Consular Services & Work Visas",
+      "title": "Consular services and work visas",
       "items": [
-        "Our deep expertise transforms complex procedures into a smooth and fast process:",
-        "Saudi Visa Management: Completing all visa procedures through Saudi consulates in the Arab Republic of Egypt (Cairo, Alexandria, and Suez).",
-        "Electronic Authorization System: Activation and management of authorizations on approved visa platforms (Enjaz) with precision and professionalism.",
-        "Biometric Appointment Booking (TasHeel): Managing biometric bookings at VFS TasHeel centers and organizing GAMCA medical appointments.",
-        "File Review: Comprehensive technical review of all documents prior to submission to avoid rejection or delays."
+        "Deep expertise that turns complex procedures into a fast, simple path",
+        "Saudi visa handling through consulates in Cairo, Alexandria, and Suez",
+        "Electronic authorization on approved visa platforms (Enjaz)",
+        "TasHeel biometric bookings and GAMCA medical appointments",
+        "Full file review before submission to avoid delays or rejection"
       ]
     },
     "section3": {
-      "title": "3. International Documentation & Attestation",
+      "title": "International documentation and attestation",
       "items": [
-        "We provide professional and accredited documentation services to ensure your documents are officially recognized for international use:",
-        "Academic Qualifications: Attestation of university degrees, diplomas, and postgraduate studies through the Ministry of Foreign Affairs and Cultural Attaché.",
-        "Official & Personal Documents: Certification of birth certificates, marriage contracts, powers of attorney, and experience certificates.",
-        "Employment Contracts: Contract attestation to ensure legal validity and protection of all parties internationally."
+        "We handle government reviews and secure official recognition for international use",
+        "Academic qualifications attested via the Ministry of Foreign Affairs and Cultural Attaché",
+        "Personal and professional papers: birth, marriage, powers of attorney, and experience certificates",
+        "Employment contracts attested to protect all parties legally"
       ]
     },
-    "whyChoose": {
-      "title": "Why Choose Our Company?",
+    "section4": {
+      "title": "Musaned platform (domestic services)",
       "items": [
-        "Absolute Professionalism: A structured approach in managing all procedures.",
-        "Speed & Commitment: We value time in the business world and strictly adhere to deadlines.",
-        "Specialized Team: Experts fully updated with the latest labor laws and regulations for 2026."
-      ]
-    },
-    "whyDifferent": {
-      "title": "Why Are We Different?",
-      "items": [
-        "Nationwide Coverage: Serving you across all governorates with the same efficiency.",
-        "Alignment with Vision 2026: Real-time adaptation to Saudi employment systems (ensuring no disruption to your transactions).",
-        "Transparency: Full clarity in fees, procedures, and timelines for every service."
+        "A safe, organized recruitment experience with a direct Musaned connection",
+        "Official attestation through labor-office electronic integration",
+        "Visa issuance handled through to the worker’s visa",
+        "Approved procedures including fees, medical insurance, and medical exams",
+        "Step-by-step Musaned support from receiving your request until departure"
       ]
     }
   }
