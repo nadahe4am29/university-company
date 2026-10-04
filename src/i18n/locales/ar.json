@@ -392,6 +392,28 @@
       "submitting": "جاري الإرسال..."
     }
   },
+  "laborRequest": {
+    "title": "طلب توفير عمالة",
+    "subtitle": "نقابة الكوادر المصرية لخدمة استثماراتكم",
+    "sectionTitle": "بيانات الجهة الطالبة",
+    "entityType": "نوع الجهة",
+    "choose": "اختر",
+    "individual": "أفراد / مساند",
+    "company": "مؤسسة / شركة",
+    "employerName": "اسم صاحب العمل",
+    "employerAddress": "عنوان صاحب العمل",
+    "employerPhone": "رقم تليفون صاحب العمل",
+    "employerEmail": "إيميل صاحب العمل",
+    "orgName": "إسم المؤسسة / الشركة",
+    "orgAddress": "عنوان المؤسسة / الشركة",
+    "contactPhone": "رقم التواصل",
+    "correspondenceEmail": "إيميل المراسلات",
+    "message": "إرسل رسالة",
+    "attach": "إرفاق ملف",
+    "submit": "إرسال الطلب",
+    "selectType": "يرجى اختيار نوع الجهة",
+    "success": "تم إرسال الطلب بنجاح"
+  },
   "postJobPage": {
     "title": "نشر وظيفة جديدة",
     "subtitle": "اعثر على المرشح المثالي لفرصتك",

@@ -2,7 +2,6 @@ import { expect, test } from "@playwright/test";
 import {
   MOCK_QUALIFIED_JOB,
   mockJobsApi,
-  mockPostJobApi,
   startWithLightTheme,
 } from "./helpers";
 
@@ -67,27 +66,37 @@ test("apply form moves to the next step after required fields", async ({
   await expect(page.getByText("المؤهل الدراسي").first()).toBeVisible();
 });
 
-test("post-job form submits through the mocked API", async ({ page }) => {
-  await mockPostJobApi(page);
-  await page.goto("/post-job");
+test("employer button opens the labor request form", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "أنا صاحب عمل" }).click();
 
-  const form = page.getByTestId("post-job-form");
+  await expect(page).toHaveURL(/\/post-job$/);
+  const form = page.getByTestId("labor-request-form");
+  await expect(
+    form.getByRole("heading", { name: "بيانات الجهة الطالبة" }),
+  ).toBeVisible();
 
-  await form.locator("select").first().selectOption("qualified");
-  await form.getByPlaceholder("أدخل المسمى الوظيفي").fill("مهندس مدني");
-  await form
-    .getByPlaceholder("أدخل وصفاً تفصيلياً للوظيفة")
-    .fill("مطلوب مهندس مدني للعمل في السعودية.");
-  await form.getByPlaceholder("أدخل موقع الوظيفة").fill("الرياض");
+  await page.getByRole("button", { name: "نوع الجهة" }).click();
+  await page.getByRole("option", { name: "أفراد / مساند" }).click();
+  await expect(page.getByText("اسم صاحب العمل")).toBeVisible();
+
+  await page.getByRole("button", { name: "نوع الجهة" }).click();
+  await page.getByRole("option", { name: "مؤسسة / شركة" }).click();
+  await expect(page.getByText("إسم المؤسسة / الشركة")).toBeVisible();
+
+  await page.getByLabel("إسم المؤسسة / الشركة").fill("شركة النور");
+  await page.getByLabel("عنوان المؤسسة / الشركة").fill("الرياض");
+  await page.getByLabel("رقم التواصل").fill("0500000000");
+  await page.getByLabel("إيميل المراسلات").fill("info@example.com");
+  await page.getByLabel("إرسل رسالة").fill("نحتاج عمالة للمشروع.");
 
   page.once("dialog", (dialog) => {
-    expect(dialog.message()).toContain("تم تقديم الوظيفة للموافقة");
+    expect(dialog.message()).toContain("تم إرسال الطلب بنجاح");
     void dialog.accept();
   });
 
-  await form.getByRole("button", { name: "إنشاء وظيفة" }).click();
-  await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "شركة الجامعة",
+  await form.getByRole("button", { name: "إرسال الطلب" }).click();
+  await expect(page.getByRole("button", { name: "نوع الجهة" })).toContainText(
+    "اختر",
   );
 });

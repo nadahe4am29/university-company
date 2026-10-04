@@ -392,6 +392,28 @@
       "submitting": "Submitting..."
     }
   },
+  "laborRequest": {
+    "title": "Labor Supply Request",
+    "subtitle": "The Egyptian Cadres Syndicate, at the service of your investments",
+    "sectionTitle": "Requesting entity details",
+    "entityType": "Entity type",
+    "choose": "Choose",
+    "individual": "Individuals / Musaned",
+    "company": "Institution / Company",
+    "employerName": "Employer name",
+    "employerAddress": "Employer address",
+    "employerPhone": "Employer phone number",
+    "employerEmail": "Employer email",
+    "orgName": "Institution / company name",
+    "orgAddress": "Institution / company address",
+    "contactPhone": "Contact number",
+    "correspondenceEmail": "Correspondence email",
+    "message": "Send a message",
+    "attach": "Attach a file",
+    "submit": "Submit request",
+    "selectType": "Please choose the entity type",
+    "success": "Your request has been sent successfully"
+  },
   "postJobPage": {
     "title": "Post a New Job",
     "subtitle": "Find the perfect candidate for your opportunity",
