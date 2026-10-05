@@ -32,7 +32,7 @@ const HomeHero = () => {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <button
               type="button"
-              onClick={() => navigate("/jobs")}
+              onClick={() => navigate("/apply")}
               className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-hover"
             >
               {t("homePage.hero.jobSeeker")}

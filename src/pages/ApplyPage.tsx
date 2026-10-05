@@ -144,7 +144,7 @@ export default function ApplyPage() {
       formData.append("skills", experience.skills);
       if (cvFile) formData.append("cv", cvFile);
 
-      await fetch(`http://localhost:5000/api/jobs/${id}/apply`, {
+      await fetch(`http://localhost:5000/api/jobs/${id ?? "general"}/apply`, {
         method: "POST",
         body: formData,
       });

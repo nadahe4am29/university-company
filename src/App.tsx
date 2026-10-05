@@ -147,6 +147,14 @@ export default function App() {
             }
           />
           <Route
+            path="/apply"
+            element={
+              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
+                <ApplyPage />
+              </AppWithNavbar>
+            }
+          />
+          <Route
             path="/apply/:id"
             element={
               <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
