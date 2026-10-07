@@ -57,7 +57,10 @@ test("apply form moves to the next step after required fields", async ({
   await page.locator('select[name="placeOfResidence"]').selectOption("القاهرة");
   await page.locator('input[name="currentJob"]').fill("مهندس برمجيات");
   await page.locator('select[name="drivingLicense"]').selectOption("yes");
+  await page.locator('select[name="licenseType"]').selectOption("private");
   await page.locator('select[name="hasPassport"]').selectOption("yes");
+  await page.locator('input[name="passportProfession"]').fill("مهندس");
+  await page.locator('input[name="passportExpiry"]').fill("2030-06-01");
   await page.locator('input[name="phone"]').fill("01012345678");
 
   await expect(page.getByTestId("apply-next")).toBeEnabled();

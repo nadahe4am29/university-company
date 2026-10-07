@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FiCheck } from "react-icons/fi";
 import ApplyStepDocuments from "../sections/apply/ApplyStepDocuments";
 import ApplyStepEducation, {
+  isEducationStepComplete,
   type EducationForm,
 } from "../sections/apply/ApplyStepEducation";
 import ApplyStepExperience, {
@@ -12,6 +14,7 @@ import ApplyStepPersonal, {
   type PersonalForm,
 } from "../sections/apply/ApplyStepPersonal";
 import ApplyStepper from "../sections/apply/ApplyStepper";
+import { isAtLeast21 } from "../sections/apply/birthdate";
 
 const TOTAL_STEPS = 4;
 
@@ -22,17 +25,27 @@ const emptyPersonal: PersonalForm = {
   placeOfResidence: "",
   currentJob: "",
   drivingLicense: "",
+  licenseType: "",
   hasPassport: "",
+  passportProfession: "",
+  passportExpiry: "",
   phone: "",
   email: "",
 };
 
 const emptyEducation: EducationForm = {
   educationLevel: "",
+  literacyLevel: "",
   schoolName: "",
+  faculty: "",
   specialization: "",
   graduationYear: "",
   grade: "",
+  hasForeignLanguage: "",
+  foreignLanguage: "",
+  languageLevel: "",
+  hasHigherQualification: "",
+  acceptedTerms: "",
 };
 
 const emptyExperience: ExperienceForm = {
@@ -47,7 +60,6 @@ const emptyExperience: ExperienceForm = {
 
 export default function ApplyPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const isQualified = Boolean(location.state?.isQualified);
@@ -57,6 +69,7 @@ export default function ApplyPage() {
   const [experience, setExperience] = useState<ExperienceForm>(emptyExperience);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const updatePersonal = (field: keyof PersonalForm, value: string) => {
     setPersonal((current) => ({ ...current, [field]: value }));
@@ -75,22 +88,19 @@ export default function ApplyPage() {
       case 1:
         return Boolean(
           personal.name &&
-            personal.birthdate &&
+            isAtLeast21(personal.birthdate) &&
             personal.maritalStatus &&
             personal.placeOfResidence &&
             personal.currentJob &&
             personal.drivingLicense &&
+            (personal.drivingLicense !== "yes" || personal.licenseType) &&
             personal.hasPassport &&
+            (personal.hasPassport !== "yes" ||
+              (personal.passportProfession && personal.passportExpiry)) &&
             personal.phone.length === 11,
         );
       case 2:
-        return Boolean(
-          education.educationLevel &&
-            education.schoolName &&
-            education.specialization &&
-            education.graduationYear &&
-            education.grade,
-        );
+        return isEducationStepComplete(education);
       case 3: {
         const hasBase = Boolean(experience.years && experience.employmentStatus);
         if (experience.employmentStatus === "company") {
@@ -126,14 +136,23 @@ export default function ApplyPage() {
       formData.append("placeOfResidence", personal.placeOfResidence);
       formData.append("currentJob", personal.currentJob);
       formData.append("hasDrivingLicense", String(personal.drivingLicense === "yes"));
+      formData.append("licenseType", personal.licenseType);
       formData.append("hasPassport", String(personal.hasPassport === "yes"));
+      formData.append("passportProfession", personal.passportProfession);
+      formData.append("passportExpiry", personal.passportExpiry);
       formData.append("phone", personal.phone);
       formData.append("email", personal.email);
       formData.append("educationLevel", education.educationLevel);
+      formData.append("literacyLevel", education.literacyLevel);
       formData.append("schoolName", education.schoolName);
+      formData.append("faculty", education.faculty);
       formData.append("specialization", education.specialization);
       formData.append("graduationYear", education.graduationYear);
       formData.append("grade", education.grade);
+      formData.append("hasForeignLanguage", education.hasForeignLanguage);
+      formData.append("foreignLanguage", education.foreignLanguage);
+      formData.append("languageLevel", education.languageLevel);
+      formData.append("hasHigherQualification", education.hasHigherQualification);
       formData.append("isQualified", String(isQualified));
       formData.append("experienceYears", experience.years);
       formData.append("employmentStatus", experience.employmentStatus);
@@ -144,19 +163,49 @@ export default function ApplyPage() {
       formData.append("skills", experience.skills);
       if (cvFile) formData.append("cv", cvFile);
 
-      await fetch(`http://localhost:5000/api/jobs/${id ?? "general"}/apply`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/jobs/${id ?? "general"}/apply`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
-      alert("✅ تم تقديم الطلب بنجاح");
-      navigate("/");
+      if (!response.ok) throw new Error("submit failed");
+
+      setSubmitted(true);
     } catch {
       alert("فشل في تقديم الطلب");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (submitted) {
+    return (
+      <div className="page-shell flex min-h-[calc(100dvh-8rem)] items-center justify-center px-4">
+        <div className="text-center">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-white">
+              <FiCheck className="h-7 w-7" strokeWidth={3} />
+            </span>
+          </div>
+          <h1 className="mt-8 text-2xl font-extrabold text-foreground md:text-3xl">
+            {t("applyPage.receivedTitle")}
+          </h1>
+          <p className="mt-3 text-sm text-muted-foreground md:text-base">
+            {t("applyPage.receivedBody")}
+          </p>
+          <Link
+            to="/"
+            className="mt-6 inline-block text-sm font-semibold text-blue-500 hover:text-blue-400"
+          >
+            {t("applyPage.backHome")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-shell">
@@ -202,7 +251,8 @@ export default function ApplyPage() {
               <span />
             )}
 
-            {currentStep < TOTAL_STEPS ? (
+            {currentStep < TOTAL_STEPS &&
+            !(currentStep === 2 && education.educationLevel === "none") ? (
               <button
                 type="button"
                 onClick={nextStep}
@@ -217,6 +267,7 @@ export default function ApplyPage() {
                 type="button"
                 onClick={handleSubmit}
                 disabled={!isStepValid() || isSubmitting}
+                data-testid="apply-submit"
                 className="rounded-xl bg-[#1a2e5b] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#152547] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSubmitting

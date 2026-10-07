@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs";
 import nodemailer from "nodemailer";
 import multer from "multer";
 import path from "path";
@@ -20,14 +21,29 @@ app.use(express.urlencoded({ extended: true }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// Create email transporter
-const transporter = nodemailer.createTransporter({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER || "your-email@gmail.com", // Replace with your email
-    pass: process.env.EMAIL_PASS || "your-app-password", // Replace with your app password
-  },
-});
+const emailUser = process.env.EMAIL_USER;
+const emailPass = process.env.EMAIL_PASS;
+const emailConfigured = Boolean(emailUser && emailPass);
+
+const transporter = emailConfigured
+  ? nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: emailUser,
+        pass: emailPass,
+      },
+    })
+  : null;
+
+const applicationsFile = path.join(__dirname, "applications.json");
+
+function saveApplication(entry) {
+  const current = fs.existsSync(applicationsFile)
+    ? JSON.parse(fs.readFileSync(applicationsFile, "utf8"))
+    : [];
+  current.push(entry);
+  fs.writeFileSync(applicationsFile, JSON.stringify(current, null, 2));
+}
 
 // Email template
 const createEmailTemplate = (formData, isQualified) => {
@@ -77,6 +93,10 @@ const createEmailTemplate = (formData, isQualified) => {
               <span class="label">Driving License:</span> 
               <span class="value">${formData.hasDrivingLicense === "true" ? `Yes (${formData.licenseType})` : "No"}</span>
             </div>
+            <div class="field">
+              <span class="label">Passport:</span>
+              <span class="value">${formData.hasPassport === "true" ? `Yes (${formData.passportProfession || ""}, expires ${formData.passportExpiry || ""})` : "No"}</span>
+            </div>
 
             <h2>📞 Contact Information</h2>
             <div class="field">
@@ -98,8 +118,20 @@ const createEmailTemplate = (formData, isQualified) => {
               <span class="value">${formData.schoolName}</span>
             </div>
             <div class="field">
+              <span class="label">Faculty:</span>
+              <span class="value">${formData.faculty || ""}</span>
+            </div>
+            <div class="field">
+              <span class="label">Literacy:</span>
+              <span class="value">${formData.literacyLevel || ""}</span>
+            </div>
+            <div class="field">
               <span class="label">Specialization:</span> 
               <span class="value">${formData.specialization}</span>
+            </div>
+            <div class="field">
+              <span class="label">Foreign language:</span>
+              <span class="value">${formData.hasForeignLanguage === "yes" ? `${formData.foreignLanguage} (${formData.languageLevel})` : formData.hasForeignLanguage || ""}</span>
             </div>
             <div class="field">
               <span class="label">Graduation Year:</span> 
@@ -165,8 +197,8 @@ app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
 
     // Email configuration
     const mailOptions = {
-      from: process.env.EMAIL_USER || "your-email@gmail.com", // Replace with your email
-      to: process.env.HR_EMAIL || "hr@yourcompany.com", // Replace with HR email
+      from: emailUser,
+      to: process.env.HR_EMAIL || emailUser,
       subject: subject,
       html: html,
       attachments: [],
@@ -180,42 +212,52 @@ app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
       });
     }
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    saveApplication({
+      ...formData,
+      cvFileName: req.file?.originalname ?? "",
+      submittedAt: new Date().toISOString(),
+    });
 
-    // Also send confirmation email to applicant
-    const confirmationMailOptions = {
-      from: process.env.EMAIL_USER || "your-email@gmail.com", // Replace with your email
-      to: formData.email,
-      subject: "Application Received - Confirmation",
-      html: `
-        <html>
-          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-              <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;">
-                <h1>✅ Application Received!</h1>
-              </div>
-              <div style="padding: 20px; background: #f9f9f9;">
-                <p>Dear ${formData.name},</p>
-                <p>Thank you for your interest in the position. We have successfully received your application.</p>
-                <p><strong>Application Details:</strong></p>
-                <ul>
-                  <li>Name: ${formData.name}</li>
-                  <li>Email: ${formData.email}</li>
-                  <li>Phone: ${formData.phone}</li>
-                  <li>Position: Job ID ${id}</li>
-                  <li>Type: ${isQualified ? "Qualified Application" : "Application Without Qualifications"}</li>
-                </ul>
-                <p>Our team will review your application and contact you if your qualifications match our requirements.</p>
-                <p>Best regards,<br/>HR Team</p>
-              </div>
-            </div>
-          </body>
-        </html>
-      `,
-    };
+    if (transporter) {
+      try {
+        await transporter.sendMail(mailOptions);
 
-    await transporter.sendMail(confirmationMailOptions);
+        if (formData.email) {
+          await transporter.sendMail({
+            from: emailUser,
+            to: formData.email,
+            subject: "Application Received - Confirmation",
+            html: `
+              <html>
+                <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;">
+                      <h1>✅ Application Received!</h1>
+                    </div>
+                    <div style="padding: 20px; background: #f9f9f9;">
+                      <p>Dear ${formData.name},</p>
+                      <p>Thank you for your interest in the position. We have successfully received your application.</p>
+                      <p><strong>Application Details:</strong></p>
+                      <ul>
+                        <li>Name: ${formData.name}</li>
+                        <li>Email: ${formData.email}</li>
+                        <li>Phone: ${formData.phone}</li>
+                        <li>Position: Job ID ${id}</li>
+                        <li>Type: ${isQualified ? "Qualified Application" : "Application Without Qualifications"}</li>
+                      </ul>
+                      <p>Our team will review your application and contact you if your qualifications match our requirements.</p>
+                      <p>Best regards,<br/>HR Team</p>
+                    </div>
+                  </div>
+                </body>
+              </html>
+            `,
+          });
+        }
+      } catch (emailError) {
+        console.error("Application saved, but email failed:", emailError);
+      }
+    }
 
     res.status(200).json({
       success: true,

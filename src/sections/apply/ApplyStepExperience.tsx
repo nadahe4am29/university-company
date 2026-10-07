@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ApplyField from "./ApplyField";
+import BirthdateField from "./BirthdateField";
 
 export type EmploymentStatus = "company" | "freelance" | "available" | "";
 
@@ -29,6 +30,29 @@ export const YEARS_OPTIONS = [
   "7-10 سنوات",
   "أكثر من 10 سنوات",
 ];
+
+const currentYear = new Date().getFullYear();
+
+function WorkDateField({
+  name,
+  value,
+  onChange,
+}: {
+  name: string;
+  value: string;
+  onChange: (next: string) => void;
+}) {
+  return (
+    <BirthdateField
+      name={name}
+      value={value}
+      onChange={onChange}
+      fromYear={1970}
+      toYear={currentYear}
+      className={fieldClass}
+    />
+  );
+}
 
 const ApplyStepExperience = ({ values, onChange }: ApplyStepExperienceProps) => {
   const { t } = useTranslation();
@@ -78,12 +102,10 @@ const ApplyStepExperience = ({ values, onChange }: ApplyStepExperienceProps) => 
             />
           </ApplyField>
           <ApplyField label={t("applyPage.experience.workStartDate")}>
-            <input
-              type="date"
+            <WorkDateField
               name="workStartDate"
               value={values.workStartDate}
-              onChange={(e) => onChange("workStartDate", e.target.value)}
-              className={fieldClass}
+              onChange={(next) => onChange("workStartDate", next)}
             />
           </ApplyField>
         </div>
@@ -91,12 +113,10 @@ const ApplyStepExperience = ({ values, onChange }: ApplyStepExperienceProps) => 
 
       {status === "freelance" && (
         <ApplyField label={t("applyPage.experience.workStartDate")}>
-          <input
-            type="date"
+          <WorkDateField
             name="workStartDate"
             value={values.workStartDate}
-            onChange={(e) => onChange("workStartDate", e.target.value)}
-            className={fieldClass}
+            onChange={(next) => onChange("workStartDate", next)}
           />
         </ApplyField>
       )}
@@ -114,23 +134,19 @@ const ApplyStepExperience = ({ values, onChange }: ApplyStepExperienceProps) => 
               />
             </ApplyField>
             <ApplyField label={t("applyPage.experience.workStartDateAlt")}>
-              <input
-                type="date"
+              <WorkDateField
                 name="workStartDate"
                 value={values.workStartDate}
-                onChange={(e) => onChange("workStartDate", e.target.value)}
-                className={fieldClass}
+                onChange={(next) => onChange("workStartDate", next)}
               />
             </ApplyField>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <ApplyField label={t("applyPage.experience.workEndDate")}>
-              <input
-                type="date"
+              <WorkDateField
                 name="workEndDate"
                 value={values.workEndDate}
-                onChange={(e) => onChange("workEndDate", e.target.value)}
-                className={fieldClass}
+                onChange={(next) => onChange("workEndDate", next)}
               />
             </ApplyField>
           </div>

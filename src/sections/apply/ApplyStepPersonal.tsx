@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ApplyField from "./ApplyField";
+import BirthdateField from "./BirthdateField";
 import { GOVERNORATES } from "./governorates";
 
 export type PersonalForm = {
@@ -9,7 +10,10 @@ export type PersonalForm = {
   placeOfResidence: string;
   currentJob: string;
   drivingLicense: string;
+  licenseType: string;
   hasPassport: string;
+  passportProfession: string;
+  passportExpiry: string;
   phone: string;
   email: string;
 };
@@ -38,15 +42,16 @@ const ApplyStepPersonal = ({ values, onChange }: ApplyStepPersonalProps) => {
         />
       </ApplyField>
 
-      <ApplyField label={t("applyPage.basicInfo.birthdate")}>
-        <input
-          type="date"
-          name="birthdate"
+      <div>
+        <span className="mb-2 block text-sm font-medium text-foreground">
+          {t("applyPage.basicInfo.birthdate")}
+        </span>
+        <BirthdateField
           value={values.birthdate}
-          onChange={(e) => onChange("birthdate", e.target.value)}
+          onChange={(next) => onChange("birthdate", next)}
           className={fieldClass}
         />
-      </ApplyField>
+      </div>
 
       <ApplyField label={t("applyPage.basicInfo.maritalStatus")}>
         <select
@@ -93,7 +98,11 @@ const ApplyStepPersonal = ({ values, onChange }: ApplyStepPersonalProps) => {
         <select
           name="drivingLicense"
           value={values.drivingLicense}
-          onChange={(e) => onChange("drivingLicense", e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            onChange("drivingLicense", next);
+            if (next !== "yes") onChange("licenseType", "");
+          }}
           className={fieldClass}
         >
           <option value="">{t("applyPage.basicInfo.select")}</option>
@@ -102,11 +111,36 @@ const ApplyStepPersonal = ({ values, onChange }: ApplyStepPersonalProps) => {
         </select>
       </ApplyField>
 
+      {values.drivingLicense === "yes" && (
+        <ApplyField label={t("applyPage.basicInfo.licenseType")}>
+          <select
+            name="licenseType"
+            value={values.licenseType}
+            onChange={(e) => onChange("licenseType", e.target.value)}
+            className={fieldClass}
+          >
+            <option value="">{t("applyPage.basicInfo.select")}</option>
+            <option value="private">{t("applyPage.basicInfo.licensePrivate")}</option>
+            <option value="third">{t("applyPage.basicInfo.licenseThird")}</option>
+            <option value="second">{t("applyPage.basicInfo.licenseSecond")}</option>
+            <option value="first">{t("applyPage.basicInfo.licenseFirst")}</option>
+            <option value="motorcycle">{t("applyPage.basicInfo.licenseMotorcycle")}</option>
+          </select>
+        </ApplyField>
+      )}
+
       <ApplyField label={t("applyPage.basicInfo.passport")}>
         <select
           name="hasPassport"
           value={values.hasPassport}
-          onChange={(e) => onChange("hasPassport", e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            onChange("hasPassport", next);
+            if (next !== "yes") {
+              onChange("passportProfession", "");
+              onChange("passportExpiry", "");
+            }
+          }}
           className={fieldClass}
         >
           <option value="">{t("applyPage.basicInfo.select")}</option>
@@ -114,6 +148,33 @@ const ApplyStepPersonal = ({ values, onChange }: ApplyStepPersonalProps) => {
           <option value="no">{t("applyPage.basicInfo.no")}</option>
         </select>
       </ApplyField>
+
+      {values.hasPassport === "yes" && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <ApplyField label={t("applyPage.basicInfo.passportProfession")}>
+            <input
+              type="text"
+              name="passportProfession"
+              value={values.passportProfession}
+              onChange={(e) => onChange("passportProfession", e.target.value)}
+              className={fieldClass}
+            />
+          </ApplyField>
+          <div>
+            <span className="mb-2 block text-sm font-medium text-foreground">
+              {t("applyPage.basicInfo.passportExpiry")}
+            </span>
+            <BirthdateField
+              name="passportExpiry"
+              value={values.passportExpiry}
+              onChange={(next) => onChange("passportExpiry", next)}
+              className={fieldClass}
+              fromYear={new Date().getFullYear()}
+              toYear={new Date().getFullYear() + 15}
+            />
+          </div>
+        </div>
+      )}
 
       <ApplyField label={t("applyPage.contactInfo.phone")}>
         <input
