@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaMapPin } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { API_URL } from "../config/api";
 
 export interface Job {
   _id: string;
@@ -24,7 +25,7 @@ export default function ApprovedJobs({ jobType }: ApprovedJobsProps) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const endpoint = `http://localhost:5000/api/jobs/${jobType}`;
+    const endpoint = `${API_URL}/api/jobs/${jobType}`;
 
     axios
       .get(endpoint)

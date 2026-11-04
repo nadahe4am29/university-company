@@ -6,6 +6,7 @@ import { DUMMY_JOBS } from "../sections/jobs/dummyJobs";
 import JobCard from "../sections/jobs/JobCard";
 import JobsFilters from "../sections/jobs/JobsFilters";
 import { normalizeJob, type JobListing } from "../sections/jobs/types";
+import { API_URL } from "../config/api";
 
 const JobsPage = () => {
   const { t } = useTranslation();
@@ -21,10 +22,10 @@ const JobsPage = () => {
     const fetchJobs = async () => {
       try {
         const [qualifiedRes, unqualifiedRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/jobs/qualified", {
+          axios.get(`${API_URL}/api/jobs/qualified`, {
             timeout: 2000,
           }),
-          axios.get("http://localhost:5000/api/jobs/unqualified", {
+          axios.get(`${API_URL}/api/jobs/unqualified`, {
             timeout: 2000,
           }),
         ]);

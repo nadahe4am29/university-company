@@ -15,6 +15,7 @@ import ApplyStepPersonal, {
 } from "../sections/apply/ApplyStepPersonal";
 import ApplyStepper from "../sections/apply/ApplyStepper";
 import { isAtLeast21 } from "../sections/apply/birthdate";
+import { API_URL } from "../config/api";
 
 const TOTAL_STEPS = 4;
 
@@ -164,7 +165,7 @@ export default function ApplyPage() {
       if (cvFile) formData.append("cv", cvFile);
 
       const response = await fetch(
-        `http://localhost:5000/api/jobs/${id ?? "general"}/apply`,
+        `${API_URL}/api/jobs/${id ?? "general"}/apply`,
         {
           method: "POST",
           body: formData,

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { JOBS_PAGE_ENABLED } from "../config/features";
 
 type HeaderProps = {
   theme: "light" | "dark";
@@ -18,7 +19,7 @@ const Header = ({ theme, toggleTheme }: HeaderProps) => {
   const menuItems = [
     { path: "/", label: t("nav.home") },
     { path: "/services", label: t("nav.services") },
-    { path: "/jobs", label: t("nav.jobs") },
+    ...(JOBS_PAGE_ENABLED ? [{ path: "/jobs", label: t("nav.jobs") }] : []),
     { path: "/about", label: t("nav.about") },
     { path: "/contact", label: t("nav.contact") },
   ];
@@ -92,7 +93,7 @@ const Header = ({ theme, toggleTheme }: HeaderProps) => {
 
             <button
               type="button"
-              onClick={() => navigate("/jobs")}
+              onClick={() => navigate(JOBS_PAGE_ENABLED ? "/jobs" : "/apply")}
               className="btn-signin hidden rounded-lg p-2 text-sm font-semibold text-white ring-1 ring-white/10 transition hover:brightness-110 md:block"
             >
               {t("nav.register")}
@@ -137,7 +138,7 @@ const Header = ({ theme, toggleTheme }: HeaderProps) => {
 
               <button
                 type="button"
-                onClick={() => navigate("/jobs")}
+                onClick={() => navigate(JOBS_PAGE_ENABLED ? "/jobs" : "/apply")}
                 className="btn-signin mt-3 rounded-full px-4 py-3 text-base font-semibold text-white ring-1 ring-white/10"
               >
                 {t("nav.register")}

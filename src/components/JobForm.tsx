@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
+import { API_URL } from "../config/api";
 
 type Mode = "create" | "edit";
 
@@ -56,7 +57,7 @@ const JobForm = ({
       experience,
     };
 
-    const res = await fetch("http://localhost:5000/api/jobs", {
+    const res = await fetch(`${API_URL}/api/jobs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

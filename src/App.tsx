@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { JOBS_PAGE_ENABLED } from "./config/features";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import JobDetailsPage from "./pages/JobDetailsPage";
@@ -133,17 +134,25 @@ export default function App() {
           <Route
             path="/jobs"
             element={
-              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
-                <JobsPage />
-              </AppWithNavbar>
+              JOBS_PAGE_ENABLED ? (
+                <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
+                  <JobsPage />
+                </AppWithNavbar>
+              ) : (
+                <Navigate to="/" replace />
+              )
             }
           />
           <Route
             path="/jobs/:id"
             element={
-              <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
-                <JobDetailsPage />
-              </AppWithNavbar>
+              JOBS_PAGE_ENABLED ? (
+                <AppWithNavbar theme={theme} toggleTheme={toggleTheme}>
+                  <JobDetailsPage />
+                </AppWithNavbar>
+              ) : (
+                <Navigate to="/" replace />
+              )
             }
           />
           <Route

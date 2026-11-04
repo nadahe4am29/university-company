@@ -6,6 +6,7 @@ import { normalizeJob, type JobListing } from "../sections/jobs/types";
 import JobDetailsBreadcrumb from "../sections/job-details/JobDetailsBreadcrumb";
 import JobDetailsContact from "../sections/job-details/JobDetailsContact";
 import JobDetailsMain from "../sections/job-details/JobDetailsMain";
+import { API_URL } from "../config/api";
 
 const JobDetailsPage = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const JobDetailsPage = () => {
 
     const fetchJobDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/jobs/${id}`, {
+        const response = await fetch(`${API_URL}/api/jobs/${id}`, {
           signal: controller.signal,
         });
         if (!response.ok) throw new Error("Job not found");

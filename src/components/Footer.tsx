@@ -2,6 +2,7 @@ import { FaFacebook, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import CompanyLogo from "./CompanyLogo";
+import { JOBS_PAGE_ENABLED } from "../config/features";
 
 const MAP_EMBED_SRC =
   "https://maps.google.com/maps?q=26%20El-Sadat%20Al-Nozha%20Nasr%20City%20Cairo&hl=ar&z=16&output=embed";
@@ -14,7 +15,7 @@ const Footer = () => {
 
   const quickLinks = [
     { to: "/", label: t("nav.home") },
-    { to: "/jobs", label: t("nav.jobs") },
+    ...(JOBS_PAGE_ENABLED ? [{ to: "/jobs", label: t("nav.jobs") }] : []),
     { to: "/about", label: t("nav.about") },
     { to: "/faq", label: t("nav.faq") },
     { to: "/contact", label: t("nav.contact") },

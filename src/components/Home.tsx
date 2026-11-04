@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Job } from "./ApprovedJobs";
 import background from "../assets/images/background.jpg";
+import { API_URL } from "../config/api";
 
 const Home = () => {
   const [jobTitles, setJobTitles] = useState<string[]>([]);
@@ -14,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const loadJobs = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/jobs");
+        const res = await fetch(`${API_URL}/api/jobs`);
         const data: Job[] = await res.json();
 
         const titles = [...new Set(data.map((job) => job.title))];
