@@ -1,9 +1,9 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-/** Digits only, international (e.g. Egypt 201004787942). Override with VITE_WHATSAPP_NUMBER in .env */
+/** Digits only, international (e.g. Egypt 201100611116). Override with VITE_WHATSAPP_NUMBER in .env */
 function whatsAppHref(): string {
-  const raw = import.meta.env.VITE_WHATSAPP_NUMBER ?? "201004787942";
+  const raw = import.meta.env.VITE_WHATSAPP_NUMBER ?? "201100611116";
   const digits = String(raw).replace(/\D/g, "");
   return `https://wa.me/${digits}`;
 }

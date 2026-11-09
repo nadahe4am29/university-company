@@ -3,7 +3,7 @@ import { FiMail, FiPhone } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 function whatsAppHref(): string {
-  const raw = import.meta.env.VITE_WHATSAPP_NUMBER ?? "201004787942";
+  const raw = import.meta.env.VITE_WHATSAPP_NUMBER ?? "201100611116";
   const digits = String(raw).replace(/\D/g, "");
   return `https://wa.me/${digits}`;
 }

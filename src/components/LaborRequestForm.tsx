@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiChevronDown } from "react-icons/fi";
+import { API_URL } from "../config/api";
 
 type EntityType = "" | "individual" | "company";
 
@@ -19,6 +20,7 @@ const LaborRequestForm = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const options: { value: EntityType; label: string }[] = [
     { value: "", label: t("laborRequest.choose") },
@@ -67,11 +69,39 @@ const LaborRequestForm = () => {
     };
   }, [open]);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!entityType) {
       alert(t("laborRequest.selectType"));
       return;
+    }
+
+    const body = new FormData();
+    body.append("entityType", entityType);
+    body.append("name", name);
+    body.append("address", address);
+    body.append("phone", phone);
+    body.append("email", email);
+    body.append("message", message);
+    const file = fileRef.current?.files?.[0];
+    if (file) body.append("attachment", file);
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_URL}/api/labor-requests`, {
+        method: "POST",
+        body,
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.message);
+      }
+    } catch (error) {
+      const detail = error instanceof Error && error.message ? `\n${error.message}` : "";
+      alert(t("laborRequest.error") + detail);
+      return;
+    } finally {
+      setSubmitting(false);
     }
 
     alert(t("laborRequest.success"));
@@ -248,9 +278,10 @@ const LaborRequestForm = () => {
 
           <button
             type="submit"
-            className="mt-6 w-full rounded-lg bg-linear-to-r from-[#2563eb] to-[#1d4ed8] py-3.5 text-base font-bold text-white transition hover:brightness-110"
+            disabled={submitting}
+            className="mt-6 w-full rounded-lg bg-linear-to-r from-[#2563eb] to-[#1d4ed8] py-3.5 text-base font-bold text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
           >
-            {t("laborRequest.submit")}
+            {submitting ? t("laborRequest.sending") : t("laborRequest.submit")}
           </button>
         </form>
       </div>
