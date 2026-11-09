@@ -2,6 +2,8 @@
   "common": {
     "logo": "الشعار",
     "loading": "جاري التحميل...",
+    "chooseFile": "اختر ملف",
+    "noFileChosen": "لم يتم اختيار ملف",
     "error": "خطأ",
     "success": "نجح",
     "cancel": "إلغاء",

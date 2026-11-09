@@ -12,6 +12,7 @@ import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicesPage";
 import Header from "./components/Header";
 import WhatsAppFab from "./components/WhatsAppFab";
+import ScrollToTop from "./components/ScrollToTop";
 import FaqPage from "./pages/FaqPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import JobsPage from "./pages/JobsPage";
@@ -64,6 +65,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <WhatsAppFab />
       <div className="flex min-h-screen flex-col bg-background">
         <Routes>

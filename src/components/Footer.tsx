@@ -50,6 +50,7 @@ const Footer = () => {
                 <Link
                   key={link.to}
                   to={link.to}
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="text-white/75 transition hover:text-white"
                 >
                   {link.label}

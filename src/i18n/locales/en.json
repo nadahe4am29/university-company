@@ -2,6 +2,8 @@
   "common": {
     "logo": "Logo",
     "loading": "Loading...",
+    "chooseFile": "Choose file",
+    "noFileChosen": "No file chosen",
     "error": "Error",
     "success": "Success",
     "cancel": "Cancel",

@@ -21,6 +21,7 @@ const LaborRequestForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [fileName, setFileName] = useState("");
 
   const options: { value: EntityType; label: string }[] = [
     { value: "", label: t("laborRequest.choose") },
@@ -112,6 +113,7 @@ const LaborRequestForm = () => {
     setEmail("");
     setMessage("");
     if (fileRef.current) fileRef.current.value = "";
+    setFileName("");
   };
 
   return (
@@ -261,16 +263,22 @@ const LaborRequestForm = () => {
                 <span className="mb-2 block text-sm text-white/90">
                   {t("laborRequest.attach")}
                 </span>
-                <div
-                  dir="ltr"
-                  className="rounded-lg border border-[#243044] bg-[#070d18] px-3 py-2.5"
-                >
+                <div className="flex cursor-pointer items-center gap-3 rounded-lg border border-[#243044] bg-[#070d18] px-3 py-2.5 focus-within:border-[#3b82f6] focus-within:ring-1 focus-within:ring-[#3b82f6]">
                   <input
                     ref={fileRef}
                     id={fileId}
                     type="file"
-                    className="block w-full text-sm text-slate-300 file:rounded file:border-0 file:bg-white file:px-3 file:py-1 file:text-sm file:text-black"
+                    onChange={(event) =>
+                      setFileName(event.target.files?.[0]?.name ?? "")
+                    }
+                    className="sr-only"
                   />
+                  <span className="shrink-0 rounded bg-white px-3 py-1 text-sm text-black">
+                    {t("common.chooseFile")}
+                  </span>
+                  <span className="truncate text-sm text-slate-300" dir="auto">
+                    {fileName || t("common.noFileChosen")}
+                  </span>
                 </div>
               </label>
             </div>
