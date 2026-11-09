@@ -657,5 +657,12 @@
         "Step-by-step Musaned support from receiving your request until departure"
       ]
     }
+  },
+  "validation": {
+    "required": "Please fill out this field",
+    "selectOption": "Please select an item from the list",
+    "chooseFile": "Please choose a file",
+    "email": "Please enter a valid email address",
+    "invalid": "Please enter a valid value"
   }
 }
